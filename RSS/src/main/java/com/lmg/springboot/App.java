@@ -9,8 +9,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.lmg.springboot.feed.service.FeedService;
+import com.lmg.springboot.feed.dao.FeedRepository;
+import com.lmg.springboot.feed.dao.ItemRepository;
 import com.lmg.springboot.listeners.MyApplicationListener;
+import com.lmg.springboot.util.FetchFeed;
 
 /***********************************
  * @ClassName: StartController.java
@@ -23,7 +25,10 @@ import com.lmg.springboot.listeners.MyApplicationListener;
 public class App implements CommandLineRunner {
     
     @Autowired
-    FeedService feedService;
+    FeedRepository         feedRepository;
+    
+    @Autowired
+    private ItemRepository itemRepository;
     
     
     public static void main(String[] args) {
@@ -42,11 +47,8 @@ public class App implements CommandLineRunner {
      * @createaAt:2017年11月7日上午10:50:35
      */
     public void run(String... args) throws Exception {
-        String link = "http://www.36kr.com/feed";
-        
-        System.out.println(feedService.addFeed(link));
-        System.out.println(feedService.findByLink(link));
         // 定时任务
+        new FetchFeed(feedRepository, itemRepository).start();
     }
     
 }

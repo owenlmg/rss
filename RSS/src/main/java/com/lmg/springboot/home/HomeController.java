@@ -25,6 +25,7 @@ import com.lmg.springboot.MyBean;
  ***********************************/
 
 @Controller
+@RequestMapping("home")
 public class HomeController {
     @Resource
     private StringRedisTemplate template;
