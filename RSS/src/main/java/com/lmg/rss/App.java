@@ -2,17 +2,17 @@
  * @Title: StartController.java
  * @Package com.lmg.springboot
  */
-package com.lmg.springboot;
+package com.lmg.rss;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.lmg.springboot.feed.dao.FeedRepository;
-import com.lmg.springboot.feed.dao.ItemRepository;
-import com.lmg.springboot.listeners.MyApplicationListener;
-import com.lmg.springboot.util.FetchFeed;
+import com.lmg.rss.feed.dao.FeedRepository;
+import com.lmg.rss.feed.dao.ItemRepository;
+import com.lmg.rss.listeners.MyApplicationListener;
+import com.lmg.rss.util.FetchFeed;
 
 /***********************************
  * @ClassName: StartController.java

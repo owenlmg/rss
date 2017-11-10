@@ -2,7 +2,7 @@
  * @Title: HomeController.java
  * @Package com.lmg.springboot.controller
  */
-package com.lmg.springboot.home;
+package com.lmg.rss.home;
 
 import java.util.Date;
 import java.util.Map;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.lmg.springboot.MyBean;
+import com.lmg.rss.MyBean;
 
 /***********************************
  * @ClassName: HomeController.java

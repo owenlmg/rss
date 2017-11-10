@@ -2,7 +2,7 @@
  * @Title: MyApplicationListener.java
  * @Package com.lmg.springboot.listeners
  */
-package com.lmg.springboot.listeners;
+package com.lmg.rss.listeners;
 
 import org.springframework.boot.context.event.ApplicationFailedEvent;
 import org.springframework.context.ApplicationListener;

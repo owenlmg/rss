@@ -2,7 +2,7 @@
  * @Title: MyBean.java
  * @Package com.lmg.springboot
  */
-package com.lmg.springboot;
+package com.lmg.rss;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
