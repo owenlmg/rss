@@ -5,10 +5,11 @@
 package com.lmg.rss.feed.service;
 
 import java.util.List;
+import java.util.Set;
 
 import com.lmg.rss.feed.model.Feed;
+import com.lmg.rss.feed.model.Item;
 import com.lmg.rss.feed.model.User;
-import com.lmg.rss.feed.model.UserFeed;
 
 /***********************************
  * @ClassName: UserService.java
@@ -30,11 +31,14 @@ public interface UserService {
     List<User> findByOpenId(String openId);
     
     
-    List<Feed> findByUserId(Integer userId);
+    Set<User> findByFeedsId(Integer feedId);
     
     
-    UserFeed subscribe(Integer userId, String url);
+    Feed subscribe(Integer userId, String url);
     
     
     void unSubscribe(Integer userId, Integer feed);
+    
+    
+    Item like(Integer userId, Integer itemId);
 }

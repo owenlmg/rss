@@ -7,6 +7,7 @@ package com.lmg.rss.feed.model;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
@@ -30,10 +31,24 @@ public class UserFeed implements Serializable {
     private static final long serialVersionUID = 1L;
     
     @Id
+    @Column(name = "user_id")
     private Integer           userId;
     @Id
+    @Column(name = "feed_id")
     private Integer           feedId;
     private Timestamp         subscribeTime;
+    
+    
+    /**
+     * <p>
+     * Title:
+     * </p>
+     * <p>
+     * Description:
+     * </p>
+     */
+    public UserFeed() {
+    }
     
     
     /**

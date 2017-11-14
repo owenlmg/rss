@@ -12,7 +12,7 @@ import javax.persistence.Embeddable;
  ***********************************/
 
 @Embeddable
-// 这个注解代表ArtLinePK这个类是用在实体里面，告诉JPA的实现产品:在实体类里面只是使用这个类定义的属性。
+// 这个注解代表UserFeedPK这个类是用在实体里面，告诉JPA的实现产品:在实体类里面只是使用这个类定义的属性。
 // 简单的理解为：UserFeedPK里的属性可以看成是UserFeed类里的属性，好比UserFeedPK的属性就是在UserFeed里定义的
 public class UserFeedPK implements Serializable {
     
@@ -22,6 +22,18 @@ public class UserFeedPK implements Serializable {
     private static final long serialVersionUID = 1L;
     private Integer           userId;
     private Integer           feedId;
+    
+    
+    /**
+     * <p>
+     * Title:
+     * </p>
+     * <p>
+     * Description:
+     * </p>
+     */
+    public UserFeedPK() {
+    }
     
     
     /**

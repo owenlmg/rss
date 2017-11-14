@@ -51,6 +51,7 @@ public class FetchFeed extends Thread {
     public FetchFeed(FeedRepository feedRepository, ItemRepository itemRepository) {
         this.feedRepository = feedRepository;
         this.itemRepository = itemRepository;
+        this.setName("FetchFeed线程");
     }
     
     

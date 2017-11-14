@@ -6,9 +6,16 @@ package com.lmg.rss.feed.model;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 /***********************************
@@ -28,6 +35,7 @@ public class User implements Serializable {
     private static final long serialVersionUID = 1L;
     
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer           id;
     private String            loginName;
     private String            loginPass;
@@ -37,6 +45,14 @@ public class User implements Serializable {
     private String            headImgUrl;
     private Timestamp         createTime;
     private Timestamp         lastUseTime;
+    
+    @ManyToMany
+    @JoinTable(name = "user_feed", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "feed_id"))
+    private Set<Feed>         feeds            = new HashSet<Feed>();
+    
+    @ManyToMany
+    @JoinTable(name = "user_item", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "item_id"))
+    private Set<Item>         items            = new HashSet<Item>();
     
     
     public Integer getId() {
@@ -126,6 +142,34 @@ public class User implements Serializable {
     
     public void setLastUseTime(Timestamp lastUseTime) {
         this.lastUseTime = lastUseTime;
+    }
+    
+    
+    public Set<Feed> getFeeds() {
+        return feeds;
+    }
+    
+    
+    public void setFeeds(Set<Feed> feeds) {
+        this.feeds = feeds;
+    }
+    
+    
+    public Set<Item> getItems() {
+        return items;
+    }
+    
+    
+    public void setItems(Set<Item> items) {
+        this.items = items;
+    }
+    
+    
+    @Override
+    public String toString() {
+        return "User [id=" + id + ", loginName=" + loginName + ", loginPass=" + loginPass + ", nickname=" + nickname
+                + ", openId=" + openId + ", sex=" + sex + ", headImgUrl=" + headImgUrl + ", createTime=" + createTime
+                + ", lastUseTime=" + lastUseTime + ", feeds=" + feeds + "]";
     }
     
 }

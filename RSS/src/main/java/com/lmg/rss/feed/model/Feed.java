@@ -7,6 +7,7 @@ package com.lmg.rss.feed.model;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,20 +30,35 @@ public class Feed implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private int               id;
+    @Column(name = "title")
     private String            title;
+    @Column(name = "description")
     private String            description;
+    @Column(name = "image_id")
     private int               imageId;
+    @Column(name = "link")
     private String            link;
+    @Column(name = "url")
     private String            url;
+    @Column(name = "language")
     private String            language;
+    @Column(name = "rating")
     private String            rating;
+    @Column(name = "copyright")
     private String            copyright;
+    @Column(name = "generator")
     private String            generator;
+    @Column(name = "ttl")
     private int               ttl;
+    @Column(name = "rss_type")
     private int               rssType;
+    @Column(name = "last_upd_date")
     private Timestamp         lastUpdDate;
+    @Column(name = "refer_count")
     private int               referCount;
+    @Column(name = "udpCycle")
     private int               udpCycle;
     
     

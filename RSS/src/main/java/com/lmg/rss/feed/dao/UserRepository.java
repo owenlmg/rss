@@ -5,6 +5,7 @@
 package com.lmg.rss.feed.dao;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.data.repository.CrudRepository;
 
@@ -23,5 +24,8 @@ public interface UserRepository extends CrudRepository<User, Integer> {
     
     
     List<User> findByOpenId(String openId);
+    
+    
+    Set<User> findByFeeds_id(Integer feedId);
     
 }

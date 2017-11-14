@@ -14,6 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.lmg.rss.feed.dao.FeedRepository;
 import com.lmg.rss.feed.dao.ItemRepository;
+import com.lmg.rss.feed.dao.UserFeedRepository;
+import com.lmg.rss.feed.dao.UserRepository;
 import com.lmg.rss.feed.model.Feed;
 import com.lmg.rss.feed.model.Item;
 import com.lmg.rss.util.FeedUtil;
@@ -30,10 +32,16 @@ import com.lmg.rss.util.FeedUtil;
 public class FeedServiceImpl implements FeedService {
     
     @Autowired
-    private FeedRepository feedRepository;
+    private FeedRepository     feedRepository;
     
     @Autowired
-    private ItemRepository itemRepository;
+    private UserRepository     userRepository;
+    
+    @Autowired
+    private UserFeedRepository userFeedRepository;
+    
+    @Autowired
+    private ItemRepository     itemRepository;
     
     
     /**
@@ -122,4 +130,5 @@ public class FeedServiceImpl implements FeedService {
         
         return feed;
     }
+    
 }

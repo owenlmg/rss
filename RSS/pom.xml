@@ -3,35 +3,34 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.lmg</groupId>
-	<artifactId>springboot</artifactId>
+	<artifactId>rss</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>springboot</name>
+	<name>rss</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<ojdbc6.version>11.2.0.1.0</ojdbc6.version>
 		<rome.version>rome</rome.version>
 		<httpclient.version>4.5.3</httpclient.version>
 	</properties>
 	
-	<build>
+	<!-- <build>
         <sourceDirectory>src/main/java</sourceDirectory>
         <resources>
-            <!-- 把src/main/resources目录下所有的文件拷贝到conf目录中 -->
+            把src/main/resources目录下所有的文件拷贝到conf目录中
             <resource>
                 <directory>src/main/resources</directory>
                 <targetPath>${project.build.directory}/conf</targetPath>
             </resource>
-            <!-- 把lib目录下所有的文件拷贝到lib目录中
-            （可能有些jar包没有办法在maven中找到，需要放在lib目录中） -->
+            把lib目录下所有的文件拷贝到lib目录中
+            （可能有些jar包没有办法在maven中找到，需要放在lib目录中）
             <resource>
                 <directory>lib</directory>
                 <targetPath>${project.build.directory}/lib</targetPath>
             </resource>
-            <!-- 把放在根目录下的脚本文件.sh,.bat拷贝到bin目录中 -->
+            把放在根目录下的脚本文件.sh,.bat拷贝到bin目录中
             <resource>
                 <directory>.</directory>
                 <includes>
@@ -43,7 +42,7 @@
         </resources>
 
         <plugins>
-            <!-- 用于编译的plugin -->
+            用于编译的plugin
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -54,18 +53,18 @@
                     <source>1.7</source>
                     <target>1.7</target>
                     <encoding>UTF-8</encoding>
-                    <!-- 如果配置了JAVA_HOME,下面应该可以不用配 -->
+                    如果配置了JAVA_HOME,下面应该可以不用配
                     <executable>C:\Program Files (x86)\Java\jdk1.8.0_91\bin\javac.exe</executable>
                 </configuration>
             </plugin>
             
-            <!-- 用于生成jar包的plugin -->
+            用于生成jar包的plugin
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>2.6</version>
                 <configuration>
-                    <!-- 把生成的jar包放在lib目录下（和其他所有jar包一起） -->
+                    把生成的jar包放在lib目录下（和其他所有jar包一起）
                     <outputDirectory>${project.build.directory}/lib</outputDirectory>
                     <archive>
                         <manifest>
@@ -74,16 +73,16 @@
                         </manifest>
                     </archive>
                     <excludes>
-                    <!-- 排除掉一些文件,不要放到jar包中，
+                    排除掉一些文件,不要放到jar包中，
                     这里是为了排除掉src/main/resources中的文件（它们应该放到conf目录）
-                    这里只能指定要排除的目标文件，而不能指定源文件，虽然不够完美，但是基本能达到目的。 -->
+                    这里只能指定要排除的目标文件，而不能指定源文件，虽然不够完美，但是基本能达到目的。
                         <exclude>*.xml</exclude>
                         <exclude>*.properties</exclude>
                     </excludes>
                 </configuration>
             </plugin>
             
-            <!-- 用于拷贝maven依赖的plugin -->
+            用于拷贝maven依赖的plugin
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
@@ -96,14 +95,14 @@
                             <goal>copy-dependencies</goal>
                         </goals>
                         <configuration>
-                        <!-- 把依赖的所有maven jar包拷贝到lib目录中（这样所有的jar包都在lib目录中） -->
+                        把依赖的所有maven jar包拷贝到lib目录中（这样所有的jar包都在lib目录中）
                             <outputDirectory>${project.build.directory}/lib</outputDirectory>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
             
-            <!-- 用于拷贝resource的plugin -->
+            用于拷贝resource的plugin
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
@@ -113,14 +112,14 @@
                 </configuration>
             </plugin>
 
-            <!-- 配置生成源代码jar的plugin -->
+            配置生成源代码jar的plugin
             <plugin>
                 <artifactId>maven-source-plugin</artifactId>
                 <version>2.4</version>
                 <configuration>
                     <attach>true</attach>
                     <encoding>UTF-8</encoding>
-                    <!-- 配置源代码jar文件的存放路径，和其他jar文件一起放在lib目录 -->
+                    配置源代码jar文件的存放路径，和其他jar文件一起放在lib目录
                     <outputDirectory>${project.build.directory}/lib</outputDirectory>
                 </configuration>
                 <executions>
@@ -134,7 +133,7 @@
             </plugin>
             
         </plugins>
-    </build>
+    </build> -->
 
 	<!-- 仓库地址 -->
 	<!-- <repositories>
@@ -177,11 +176,15 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
-		<dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
+		<!-- <dependency>
 			<groupId>org.mybatis.spring.boot</groupId>
 			<artifactId>mybatis-spring-boot-starter</artifactId>
 			<version>1.3.1</version>
-		</dependency>
+		</dependency> -->
 		<dependency>
 		    <groupId>com.rometools</groupId>
 		    <artifactId>rome</artifactId>
@@ -202,9 +205,5 @@
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
 				
-
-
-		<!-- <dependency> <groupId>com.oracle</groupId> <artifactId>ojdbc6</artifactId> 
-			<version>${ojdbc6.version}</version> </dependency> -->
 	</dependencies>
 </project>

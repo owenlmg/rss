@@ -26,4 +26,6 @@ public interface FeedService {
     
     
     Feed addFeed(String url);
+    
+    // Set<Feed> findByUsersId(Integer id);
 }
