@@ -41,6 +41,13 @@ public class User implements Serializable {
     private String            loginPass;
     private String            nickname;
     private String            openId;
+    private String            sessionKey;
+    private String            session;
+    private String            city;
+    private String            province;
+    private String            country;
+    private String            language;
+    
     private Integer           sex;
     private String            headImgUrl;
     private Timestamp         createTime;
@@ -162,6 +169,66 @@ public class User implements Serializable {
     
     public void setItems(Set<Item> items) {
         this.items = items;
+    }
+    
+    
+    public String getSessionKey() {
+        return sessionKey;
+    }
+    
+    
+    public void setSessionKey(String sessionKey) {
+        this.sessionKey = sessionKey;
+    }
+    
+    
+    public String getSession() {
+        return session;
+    }
+    
+    
+    public void setSession(String session) {
+        this.session = session;
+    }
+    
+    
+    public String getCity() {
+        return city;
+    }
+    
+    
+    public void setCity(String city) {
+        this.city = city;
+    }
+    
+    
+    public String getProvince() {
+        return province;
+    }
+    
+    
+    public void setProvince(String province) {
+        this.province = province;
+    }
+    
+    
+    public String getCountry() {
+        return country;
+    }
+    
+    
+    public void setCountry(String country) {
+        this.country = country;
+    }
+    
+    
+    public String getLanguage() {
+        return language;
+    }
+    
+    
+    public void setLanguage(String language) {
+        this.language = language;
     }
     
     

@@ -4,11 +4,15 @@
  */
 package com.lmg.rss.feed.service;
 
+import java.nio.charset.Charset;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Set;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +25,8 @@ import com.lmg.rss.feed.model.Item;
 import com.lmg.rss.feed.model.User;
 import com.lmg.rss.feed.model.UserFeed;
 import com.lmg.rss.feed.model.UserFeedPK;
+import com.lmg.rss.util.HttpRequest;
+import com.lmg.rss.util.MD5Util;
 
 /***********************************
  * @ClassName: UserServiceImpl.java
@@ -45,6 +51,8 @@ public class UserServiceImpl implements UserService {
     private FeedRepository     feedRepository;
     @Autowired
     private ItemRepository     itemRepository;
+    @Autowired
+    private Environment        env;
     
     
     /**
@@ -57,15 +65,21 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public User save(User user) {
-        List<User> users = userRepository.findByLoginName(user.getLoginName());
+        List<User> users = userRepository.findBySession(user.getSession());
         if (users.size() > 0){
-            user.setCreateTime(users.get(0).getCreateTime());
-            user.setLastUseTime(users.get(0).getLastUseTime());
-        } else{
-            user.setCreateTime(new Timestamp(System.currentTimeMillis()));
-            user.setLastUseTime(new Timestamp(System.currentTimeMillis()));
+            User saveUser = users.get(0);
+            
+            saveUser.setHeadImgUrl(user.getHeadImgUrl());
+            saveUser.setCity(user.getCity());
+            saveUser.setCountry(user.getCountry());
+            saveUser.setSex(user.getSex());
+            saveUser.setLanguage(user.getLanguage());
+            saveUser.setNickname(user.getNickname());
+            saveUser.setProvince(user.getProvince());
+            
+            return userRepository.save(saveUser);
         }
-        return userRepository.save(user);
+        return null;
     }
     
     
@@ -212,5 +226,62 @@ public class UserServiceImpl implements UserService {
         user = userRepository.save(user);
         
         return item;
+    }
+    
+    
+    /**
+     * @Title: getSession
+     * @Description: TODO
+     * @param code
+     * @return
+     * @createdBy:Luomingguo
+     * @createaAt:2017年11月28日下午5:03:39
+     */
+    @Override
+    public String getSession(String code) {
+        StringBuilder url = new StringBuilder(env.getProperty("wx.url"));
+        url.append("?appid=");
+        url.append(env.getProperty("wx.appId"));
+        url.append("&secret=");
+        url.append(env.getProperty("wx.appSecret"));
+        url.append("&js_code=");
+        url.append(code);
+        url.append("&grant_type=");
+        url.append("authorization_code");
+        String result = HttpRequest.sendGet(url.toString(), Charset.forName("UTF-8"));
+        String openId = "";
+        String sessionKey = "";
+        String unionid = "";
+        try{
+            JSONObject jsonObject = new JSONObject(result);
+            if (jsonObject.has("openid")){
+                openId = jsonObject.getString("openid");
+            }
+            if (jsonObject.has("session_key")){
+                sessionKey = jsonObject.getString("session_key");
+            }
+            if (jsonObject.has("unionid")){
+                unionid = jsonObject.getString("unionid");
+            }
+            String session = MD5Util.getMd5(openId + sessionKey);
+            // 检查openid存不存在
+            List<User> users = userRepository.findByOpenId(openId);
+            if (users.size() > 0){
+                return users.get(0).getSession();
+            }
+            User user = new User();
+            user.setOpenId(openId);
+            user.setSessionKey(sessionKey);
+            user.setSession(session);
+            user.setCreateTime(new Timestamp(System.currentTimeMillis()));
+            user.setLastUseTime(user.getCreateTime());
+            
+            userRepository.save(user);
+            return session;
+        } catch (JSONException e){
+            e.printStackTrace();
+        }
+        
+        return null;
     }
 }

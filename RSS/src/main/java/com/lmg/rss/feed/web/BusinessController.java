@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lmg.rss.feed.model.Feed;
@@ -52,8 +53,22 @@ public class BusinessController {
      * @createdBy:Luomingguo
      * @createaAt:2017年11月10日上午8:54:21
      */
+    @RequestMapping(value = "/getSession/{code}")
+    public String getSession(@PathVariable String code) {
+        return userService.getSession(code);
+    }
+    
+    
     @RequestMapping(value = "/user")
     public User addUser(@RequestBody User user) {
+        // User user = new User();
+        // user.setHeadImgUrl(avatarUrl);
+        // user.setCity(city);
+        // user.setCountry(country);
+        // user.setSex(gender);
+        // user.setLanguage(language);
+        // user.setNickname(nickName);
+        // user.setProvince(province);
         return userService.save(user);
     }
     
@@ -116,10 +131,19 @@ public class BusinessController {
      * @createdBy:Luomingguo
      * @createaAt:2017年11月14日下午1:23:54
      */
-    @RequestMapping(value = "/items/{feed}/{page}")
-    public Page<Item> getItems(@PathVariable Integer feed, @PathVariable Integer page) {
-        Pageable pageable = new PageRequest(page, 10);
+    @RequestMapping(value = "/items/{feed}/{page}/{size}")
+    public Page<Item> getItems(@PathVariable Integer feed, @PathVariable Integer page, @PathVariable Integer size) {
+        Pageable pageable = new PageRequest(page, size);
+        if (feed == 0){
+            return itemService.findByUserIdOrderByPubDateDesc(1, pageable);
+        }
         return itemService.findByFeedIdOrderByPubDateDesc(feed, pageable);
+    }
+    
+    
+    @RequestMapping(value = "/item/{item}")
+    public Item getItem(@PathVariable Integer item) {
+        return itemService.findOne(item);
     }
     
     
@@ -143,5 +167,12 @@ public class BusinessController {
     public Set<Item> getLikes(@PathVariable Integer user, @PathVariable Integer page) {
         Pageable pageable = new PageRequest(page, 10);
         return userService.findOne(user).getItems();
+    }
+    
+    
+    @RequestMapping("/test")
+    @ResponseBody
+    String test() {
+        return "success";
     }
 }

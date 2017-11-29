@@ -6,12 +6,18 @@ package com.lmg.rss.feed.model;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /***********************************
  * @ClassName: Rss.java
@@ -22,6 +28,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "item")
+@JsonIgnoreProperties({ "feed" })
 public class Item implements Serializable {
     /**
      * @Fields serialVersionUID:TODO
@@ -30,7 +37,7 @@ public class Item implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int               id;
-    private int               feedId;
+    // private int feedId;
     private String            title;
     private String            link;
     private String            author;
@@ -39,6 +46,13 @@ public class Item implements Serializable {
     private String            comments;
     private String            descriptionType;
     private String            descriptionValue;
+    private String            firstImg;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "feed_id")
+    private Feed              feed;
+    private String            pubDateStr;
+    private String            feedName;
     
     
     public int getId() {
@@ -51,15 +65,14 @@ public class Item implements Serializable {
     }
     
     
-    public int getFeedId() {
-        return feedId;
-    }
-    
-    
-    public void setFeedId(int feedId) {
-        this.feedId = feedId;
-    }
-    
+    // public int getFeedId() {
+    // return feedId;
+    // }
+    //
+    //
+    // public void setFeedId(int feedId) {
+    // this.feedId = feedId;
+    // }
     
     public String getTitle() {
         return title;
@@ -140,4 +153,33 @@ public class Item implements Serializable {
         this.descriptionValue = descriptionValue;
     }
     
+    
+    public String getFirstImg() {
+        return firstImg;
+    }
+    
+    
+    public void setFirstImg(String firstImg) {
+        this.firstImg = firstImg;
+    }
+    
+    
+    public Feed getFeed() {
+        return feed;
+    }
+    
+    
+    public void setFeed(Feed feed) {
+        this.feed = feed;
+    }
+    
+    
+    public String getPubDateStr() {
+        return new SimpleDateFormat("yyyy-MM-dd hh:mm").format(pubDate);
+    }
+    
+    
+    public String getFeedName() {
+        return feed == null ? "" : feed.getTitle();
+    }
 }

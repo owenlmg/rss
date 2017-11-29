@@ -23,6 +23,9 @@ public interface UserRepository extends CrudRepository<User, Integer> {
     List<User> findByLoginName(String loginName);
     
     
+    List<User> findBySession(String session);
+    
+    
     List<User> findByOpenId(String openId);
     
     

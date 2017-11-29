@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -47,14 +49,13 @@ public class FeedUtil {
     
     public static void main(String[] args) throws IllegalArgumentException, MalformedURLException, FeedException,
             IOException {
-        String url = "http://www.guokr.com/rss/";
+        String url = "http://www.36kr.com/feed";
         // WireFeed wireFeed =
         // parse("http://news.163.com/special/00011K6L/rss_newsattitude.xml");
         WireFeed wireFeed = parse(url);
         // WireFeed wireFeed = parse("http://www.ftchinese.com/rss/feed");
-        System.out.println(wireFeed);
+        System.out.println(parseReturnFeedAndItems(url));
         
-        // feedByHttp(url);
     }
     
     
@@ -100,6 +101,7 @@ public class FeedUtil {
                     myItem.setLink(item.getLink());
                     myItem.setDescriptionType(item.getDescription().getType());
                     myItem.setDescriptionValue(item.getDescription().getValue());
+                    myItem.setFirstImg(getFirstImg(item.getDescription().getValue()));
                     myItem.setAuthor(item.getAuthor());
                     StringBuffer sb = new StringBuffer();
                     for (Category category : item.getCategories()){
@@ -160,6 +162,25 @@ public class FeedUtil {
         map.put("items", itemList);
         
         return map;
+    }
+    
+    
+    /**
+     * @Title: getFirstImg
+     * @Description: TODO
+     * @param value
+     * @return
+     * @createdBy:Luomingguo
+     * @createaAt:2017年11月28日上午10:17:58
+     */
+    private static String getFirstImg(String value) {
+        String img = null;
+        Pattern pattern = Pattern.compile("<img\\s*src\\s*=\\s*[\'\"](http.*?)[\'\"]\\s");
+        Matcher matcher = pattern.matcher(value);
+        if (matcher.find()){
+            img = matcher.group(1);
+        }
+        return img;
     }
     
     

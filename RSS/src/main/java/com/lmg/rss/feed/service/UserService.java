@@ -41,4 +41,15 @@ public interface UserService {
     
     
     Item like(Integer userId, Integer itemId);
+    
+    
+    /**
+     * @Title: getSession
+     * @Description: TODO
+     * @param code
+     * @return
+     * @createdBy:Luomingguo
+     * @createaAt:2017年11月28日下午5:03:29
+     */
+    String getSession(String code);
 }

@@ -88,7 +88,12 @@ public class FetchFeed extends Thread {
                             if (item.getPubDate().before(lastUpdDate)){
                                 it.remove();
                             } else{
-                                item.setFeedId(feed.getId());
+                                // 重复性检测
+                                if (itemRepository.countByLink(item.getLink()) == 0){
+                                    item.setFeed(feed);
+                                } else{
+                                    it.remove();
+                                }
                             }
                         }
                         if (itemList.size() > 0){

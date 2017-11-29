@@ -124,7 +124,7 @@ public class FeedServiceImpl implements FeedService {
         }
         feed = feedRepository.save(feed);
         for (Item item : itemList){
-            item.setFeedId(feed.getId());
+            item.setFeed(feed);
         }
         itemRepository.save(itemList);
         

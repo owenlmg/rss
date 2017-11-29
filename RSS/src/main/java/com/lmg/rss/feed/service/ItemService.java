@@ -18,4 +18,10 @@ import com.lmg.rss.feed.model.Item;
 
 public interface ItemService {
     Page<Item> findByFeedIdOrderByPubDateDesc(Integer feedId, Pageable pageable);
+    
+    
+    Item findOne(Integer item);
+    
+    
+    Page<Item> findByUserIdOrderByPubDateDesc(Integer userId, Pageable pageable);
 }
