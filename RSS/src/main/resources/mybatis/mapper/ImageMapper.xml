@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.lmg.rss.feed.model.Image">
+
+	<resultMap type="com.lmg.rss.feed.model.Image" id="Image" autoMapping="true">
+		    <result property="id" column="ID" jdbcType="NUMERIC" />
+            <result property="title" column="TITLE" jdbcType="VARCHAR" />
+            <result property="link" column="LINK" jdbcType="VARCHAR" />
+            <result property="url" column="URL" jdbcType="VARCHAR" />
+            <result property="description" column="DESCRIPTION" jdbcType="VARCHAR" />
+            <result property="feedId" column="FEED_ID" jdbcType="NUMERIC" />
+
+	</resultMap>
+	
+	<!-- selectById -->
+    <select id="get" resultMap="Image">
+    	<![CDATA[
+       		SELECT ID,TITLE,LINK,URL,DESCRIPTION,FEED_ID FROM IMAGE WHERE ID=#{id}
+       	]]>
+    </select>
+    
+    <select id="selectAll" resultMap="Image">
+    	<![CDATA[
+    		SELECT ID,TITLE,LINK,URL,DESCRIPTION,FEED_ID FROM IMAGE 
+    	]]>
+    </select>
+    
+    <select id="countAll" resultType="java.lang.Integer">
+    	<![CDATA[
+    		SELECT COUNT(ID)  FROM IMAGE
+    	]]>
+    </select>
+    
+    <select id="selectByModel" resultMap="Image" parameterType="com.lmg.rss.feed.model.Image">
+    	<![CDATA[
+	    	SELECT ID,TITLE,LINK,URL,DESCRIPTION,FEED_ID FROM IMAGE 
+	    	WHERE 1=1 
+    	]]>
+    	    <if test=" id != null and id != '' "> AND  ID=#{id} </if>
+            <if test=" title != null and title != '' "> AND  TITLE=#{title} </if>
+            <if test=" link != null and link != '' "> AND  LINK=#{link} </if>
+            <if test=" url != null and url != '' "> AND  URL=#{url} </if>
+            <if test=" description != null and description != '' "> AND  DESCRIPTION=#{description} </if>
+            <if test=" feedId != null and feedId != '' "> AND  FEED_ID=#{feedId} </if>
+
+        	<if test=" orderBy !=null and orderBy!='' ">
+                order by ${orderBy}
+            </if>
+    </select>
+    
+    <select id="selectByMap" resultMap="Image" parameterType="java.util.Map">
+    	<![CDATA[
+	    	SELECT ID,TITLE,LINK,URL,DESCRIPTION,FEED_ID FROM IMAGE 
+	    	WHERE 1=1 
+    	]]>
+    	    <if test=" id != null and id != '' "> AND  ID=#{id} </if>
+            <if test=" title != null and title != '' "> AND  TITLE=#{title} </if>
+            <if test=" link != null and link != '' "> AND  LINK=#{link} </if>
+            <if test=" url != null and url != '' "> AND  URL=#{url} </if>
+            <if test=" description != null and description != '' "> AND  DESCRIPTION=#{description} </if>
+            <if test=" feedId != null and feedId != '' "> AND  FEED_ID=#{feedId} </if>
+
+        	<if test=" orderBy !=null and orderBy!='' ">
+                order by ${orderBy}
+            </if>
+    </select>   
+    
+    <select id="countByMap"  resultType="java.lang.Integer" parameterType="java.util.Map">
+    	<![CDATA[
+	    	SELECT COUNT(ID)  FROM IMAGE 
+	    	WHERE 1=1 
+    	]]>
+    	    <if test=" id != null and id != '' "> AND  ID=#{id} </if>
+            <if test=" title != null and title != '' "> AND  TITLE=#{title} </if>
+            <if test=" link != null and link != '' "> AND  LINK=#{link} </if>
+            <if test=" url != null and url != '' "> AND  URL=#{url} </if>
+            <if test=" description != null and description != '' "> AND  DESCRIPTION=#{description} </if>
+            <if test=" feedId != null and feedId != '' "> AND  FEED_ID=#{feedId} </if>
+
+    </select>  
+    
+    <select id="selectByLike" resultMap="Image" parameterType="java.util.Map">
+    	<![CDATA[
+	    	SELECT ID,TITLE,LINK,URL,DESCRIPTION,FEED_ID FROM IMAGE 
+	    	WHERE 1=1 
+    	]]>
+            <if test=" id != null and id != '' "> AND  ID=#{id} </if>
+            <if test=" title != null and title != '' " > AND TITLE LIKE CONCAT('%',#{title},'%') </if>
+            <if test=" link != null and link != '' " > AND LINK LIKE CONCAT('%',#{link},'%') </if>
+            <if test=" url != null and url != '' " > AND URL LIKE CONCAT('%',#{url},'%') </if>
+            <if test=" description != null and description != '' " > AND DESCRIPTION LIKE CONCAT('%',#{description},'%') </if>
+            <if test=" feedId != null and feedId != '' "> AND  FEED_ID=#{feedId} </if>
+
+            <if test=" orderBy !=null and orderBy!='' ">
+                order by ${orderBy}
+            </if>
+     </select>
+    
+    <insert id="insert" parameterType="com.lmg.rss.feed.model.Image"  useGeneratedKeys="true" keyProperty="id">
+        
+    	<![CDATA[
+    		INSERT INTO IMAGE( TITLE,LINK,URL,DESCRIPTION,FEED_ID ) VALUES (#{title},#{link},#{url},#{description},#{feedId} )
+    	]]>
+    </insert>
+
+	
+	<update id="update" parameterType="com.lmg.rss.feed.model.Image">
+		<![CDATA[
+			UPDATE IMAGE SET ID=#{id},TITLE=#{title},LINK=#{link},URL=#{url},DESCRIPTION=#{description},FEED_ID=#{feedId} WHERE ID=#{id}
+		]]>
+	</update>   
+	
+	<delete id="delete">
+		DELETE FROM IMAGE WHERE ID = #{id}
+	</delete>
+    
+</mapper>

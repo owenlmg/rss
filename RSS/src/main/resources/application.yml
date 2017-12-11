@@ -1,0 +1,30 @@
+spring:
+  redis:
+    port: 6378
+  datasource:
+    jdbc-url: jdbc:mysql://127.0.0.1:3306/rss?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false&zeroDateTimeBehavior=convertToNull
+    username: root
+    password: 
+    driver-class-name: com.mysql.jdbc.Driver
+    hikari:
+      auto-commit: true
+      connection-test-query: SELECT 1
+      maximum-pool-size: 150
+  jpa:
+    hibernate:
+      ddl-auto: update
+logging:
+  level:
+    root: info
+  file: ../logs/rss.log
+  
+mybatis:
+  config-locations: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml
+
+wx:
+  url: https://api.weixin.qq.com/sns/jscode2session
+  appId: wxf1ad00155fc2762b
+  appSecret: 8885ef2f20bbc5ba6590628458ce7a41
+  
+session_not_check_url: /getSession/*

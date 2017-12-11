@@ -1,98 +1,74 @@
 /**
- * @Title: Rss.java
- * @Package com.lmg.springboot.feed.model
+ * @Title: ImageMapper.java
+ * @Package com.lmg.rss.feed.model 
  */
 package com.lmg.rss.feed.model;
 
-import java.io.Serializable;
+import com.lmg.rss.common.model.BaseModel;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-/***********************************
- * @ClassName: Rss.java
- * @Description: TODO
- * @author: Luomingguo
- * @createdAt: 2017年11月8日下午3:07:39
- ***********************************/
-
-@Entity
-@Table(name = "image")
-public class Image implements Serializable {
+public class Image extends BaseModel {
     /**
-     * @Fields serialVersionUID:TODO
+     * @Fields serialVersionUID:序列 
      */
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int               id;
-    private int               feedId;
-    private String            title;
-    private String            description;
-    private String            link;
-    private String            url;
     
-    
-    public int getId() {
-        return id;
-    }
-    
-    
-    public void setId(int id) {
-        this.id = id;
-    }
-    
-    
-    public int getFeedId() {
-        return feedId;
-    }
-    
-    
-    public void setFeedId(int feedId) {
-        this.feedId = feedId;
-    }
-    
-    
-    public String getTitle() {
+    /**
+    *表名
+    */
+    public final static String TABLE_NAME ="IMAGE";
+    private java.lang.String title;
+    private java.lang.String link;
+    private java.lang.String url;
+    private java.lang.String description;
+    private java.lang.Integer feedId;
+
+ 
+ 
+ 
+    public java.lang.String getTitle(){
         return title;
-    }
-    
-    
-    public void setTitle(String title) {
+    }    
+    public void  setTitle(java.lang.String  title){
         this.title = title;
     }
-    
-    
-    public String getDescription() {
-        return description;
-    }
-    
-    
-    public void setDescription(String description) {
-        this.description = description;
-    }
-    
-    
-    public String getLink() {
+
+
+    public java.lang.String getLink(){
         return link;
-    }
-    
-    
-    public void setLink(String link) {
+    }    
+    public void  setLink(java.lang.String  link){
         this.link = link;
     }
-    
-    
-    public String getUrl() {
+
+
+    public java.lang.String getUrl(){
         return url;
-    }
-    
-    
-    public void setUrl(String url) {
+    }    
+    public void  setUrl(java.lang.String  url){
         this.url = url;
     }
-    
+
+
+    public java.lang.String getDescription(){
+        return description;
+    }    
+    public void  setDescription(java.lang.String  description){
+        this.description = description;
+    }
+
+
+    public java.lang.Integer getFeedId(){
+        return feedId;
+    }    
+    public void  setFeedId(java.lang.Integer  feedId){
+        this.feedId = feedId;
+    }
+
+
+ 
+     @Override
+    public String toString() {
+        return "IMAGE [title= " + title + ", link= " + link + ", url= " + url + ", description= " + description + ", feedId= " + feedId + "]";
+    }
 }
+

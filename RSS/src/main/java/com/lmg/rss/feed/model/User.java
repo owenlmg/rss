@@ -1,242 +1,167 @@
 /**
- * @Title: User.java
- * @Package com.lmg.springboot.sys.model
+ * @Title: UserMapper.java
+ * @Package com.lmg.rss.feed.model 
  */
 package com.lmg.rss.feed.model;
 
-import java.io.Serializable;
-import java.sql.Timestamp;
-import java.util.HashSet;
-import java.util.Set;
+import com.lmg.rss.common.model.BaseModel;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-
-/***********************************
- * @ClassName: User.java
- * @Description: TODO
- * @author: Luomingguo
- * @createdAt: 2017年11月9日下午1:27:03
- ***********************************/
-
-@Entity
-@Table(name = "user")
-public class User implements Serializable {
-    
+public class User extends BaseModel {
     /**
-     * @Fields serialVersionUID:TODO
+     * @Fields serialVersionUID:序列 
      */
     private static final long serialVersionUID = 1L;
     
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer           id;
-    private String            loginName;
-    private String            loginPass;
-    private String            nickname;
-    private String            openId;
-    private String            sessionKey;
-    private String            session;
-    private String            city;
-    private String            province;
-    private String            country;
-    private String            language;
-    
-    private Integer           sex;
-    private String            headImgUrl;
-    private Timestamp         createTime;
-    private Timestamp         lastUseTime;
-    
-    @ManyToMany
-    @JoinTable(name = "user_feed", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "feed_id"))
-    private Set<Feed>         feeds            = new HashSet<Feed>();
-    
-    @ManyToMany
-    @JoinTable(name = "user_item", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "item_id"))
-    private Set<Item>         items            = new HashSet<Item>();
-    
-    
-    public Integer getId() {
-        return id;
-    }
-    
-    
-    public void setId(Integer id) {
-        this.id = id;
-    }
-    
-    
-    public String getLoginName() {
+    /**
+    *表名
+    */
+    public final static String TABLE_NAME ="USER";
+    /**
+    *账号
+    */
+    private java.lang.String loginName;
+    /**
+    *密码
+    */
+    private java.lang.String loginPass;
+    private java.lang.String nickname;
+    private java.lang.String openId;
+    private java.lang.String sessionKey;
+    private java.lang.String session;
+    private java.lang.Integer sex;
+    private java.lang.String headImgUrl;
+    private java.lang.String city;
+    private java.lang.String province;
+    private java.lang.String country;
+    private java.lang.String language;
+    private java.sql.Timestamp createTime;
+    private java.sql.Timestamp lastUseTime;
+
+ 
+ 
+     /**
+    *set loginName:账号
+    */
+
+    public java.lang.String getLoginName(){
         return loginName;
-    }
-    
-    
-    public void setLoginName(String loginName) {
+    }    
+    public void  setLoginName(java.lang.String  loginName){
         this.loginName = loginName;
     }
-    
-    
-    public String getLoginPass() {
+
+    /**
+    *set loginPass:密码
+    */
+
+    public java.lang.String getLoginPass(){
         return loginPass;
-    }
-    
-    
-    public void setLoginPass(String loginPass) {
+    }    
+    public void  setLoginPass(java.lang.String  loginPass){
         this.loginPass = loginPass;
     }
-    
-    
-    public String getNickname() {
+
+
+    public java.lang.String getNickname(){
         return nickname;
-    }
-    
-    
-    public void setNickname(String nickname) {
+    }    
+    public void  setNickname(java.lang.String  nickname){
         this.nickname = nickname;
     }
-    
-    
-    public String getOpenId() {
+
+
+    public java.lang.String getOpenId(){
         return openId;
-    }
-    
-    
-    public void setOpenId(String openId) {
+    }    
+    public void  setOpenId(java.lang.String  openId){
         this.openId = openId;
     }
-    
-    
-    public Integer getSex() {
-        return sex;
-    }
-    
-    
-    public void setSex(Integer sex) {
-        this.sex = sex;
-    }
-    
-    
-    public String getHeadImgUrl() {
-        return headImgUrl;
-    }
-    
-    
-    public void setHeadImgUrl(String headImgUrl) {
-        this.headImgUrl = headImgUrl;
-    }
-    
-    
-    public Timestamp getCreateTime() {
-        return createTime;
-    }
-    
-    
-    public void setCreateTime(Timestamp createTime) {
-        this.createTime = createTime;
-    }
-    
-    
-    public Timestamp getLastUseTime() {
-        return lastUseTime;
-    }
-    
-    
-    public void setLastUseTime(Timestamp lastUseTime) {
-        this.lastUseTime = lastUseTime;
-    }
-    
-    
-    public Set<Feed> getFeeds() {
-        return feeds;
-    }
-    
-    
-    public void setFeeds(Set<Feed> feeds) {
-        this.feeds = feeds;
-    }
-    
-    
-    public Set<Item> getItems() {
-        return items;
-    }
-    
-    
-    public void setItems(Set<Item> items) {
-        this.items = items;
-    }
-    
-    
-    public String getSessionKey() {
+
+
+    public java.lang.String getSessionKey(){
         return sessionKey;
-    }
-    
-    
-    public void setSessionKey(String sessionKey) {
+    }    
+    public void  setSessionKey(java.lang.String  sessionKey){
         this.sessionKey = sessionKey;
     }
-    
-    
-    public String getSession() {
+
+
+    public java.lang.String getSession(){
         return session;
-    }
-    
-    
-    public void setSession(String session) {
+    }    
+    public void  setSession(java.lang.String  session){
         this.session = session;
     }
-    
-    
-    public String getCity() {
-        return city;
+
+
+    public java.lang.Integer getSex(){
+        return sex;
+    }    
+    public void  setSex(java.lang.Integer  sex){
+        this.sex = sex;
     }
-    
-    
-    public void setCity(String city) {
+
+
+    public java.lang.String getHeadImgUrl(){
+        return headImgUrl;
+    }    
+    public void  setHeadImgUrl(java.lang.String  headImgUrl){
+        this.headImgUrl = headImgUrl;
+    }
+
+
+    public java.lang.String getCity(){
+        return city;
+    }    
+    public void  setCity(java.lang.String  city){
         this.city = city;
     }
-    
-    
-    public String getProvince() {
+
+
+    public java.lang.String getProvince(){
         return province;
-    }
-    
-    
-    public void setProvince(String province) {
+    }    
+    public void  setProvince(java.lang.String  province){
         this.province = province;
     }
-    
-    
-    public String getCountry() {
+
+
+    public java.lang.String getCountry(){
         return country;
-    }
-    
-    
-    public void setCountry(String country) {
+    }    
+    public void  setCountry(java.lang.String  country){
         this.country = country;
     }
-    
-    
-    public String getLanguage() {
+
+
+    public java.lang.String getLanguage(){
         return language;
-    }
-    
-    
-    public void setLanguage(String language) {
+    }    
+    public void  setLanguage(java.lang.String  language){
         this.language = language;
     }
-    
-    
-    @Override
-    public String toString() {
-        return "User [id=" + id + ", loginName=" + loginName + ", loginPass=" + loginPass + ", nickname=" + nickname
-                + ", openId=" + openId + ", sex=" + sex + ", headImgUrl=" + headImgUrl + ", createTime=" + createTime
-                + ", lastUseTime=" + lastUseTime + ", feeds=" + feeds + "]";
+
+
+    public java.sql.Timestamp getCreateTime(){
+        return createTime;
+    }    
+    public void  setCreateTime(java.sql.Timestamp  createTime){
+        this.createTime = createTime;
     }
-    
+
+
+    public java.sql.Timestamp getLastUseTime(){
+        return lastUseTime;
+    }    
+    public void  setLastUseTime(java.sql.Timestamp  lastUseTime){
+        this.lastUseTime = lastUseTime;
+    }
+
+
+ 
+     @Override
+    public String toString() {
+        return "USER [loginName= " + loginName + ", loginPass= " + loginPass + ", nickname= " + nickname + ", openId= " + openId + ", sessionKey= " + sessionKey + ", session= " + session + ", sex= " + sex + ", headImgUrl= " + headImgUrl + ", city= " + city + ", province= " + province + ", country= " + country + ", language= " + language + ", createTime= " + createTime + ", lastUseTime= " + lastUseTime + "]";
+    }
 }
+

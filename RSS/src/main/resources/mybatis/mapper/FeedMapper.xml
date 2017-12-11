@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.lmg.rss.feed.model.Feed">
+
+	<resultMap type="com.lmg.rss.feed.model.Feed" id="Feed" autoMapping="true">
+		    <result property="id" column="ID" jdbcType="NUMERIC" />
+            <result property="title" column="TITLE" jdbcType="VARCHAR" />
+            <result property="link" column="LINK" jdbcType="VARCHAR" />
+            <result property="url" column="URL" jdbcType="VARCHAR" />
+            <result property="imageId" column="IMAGE_ID" jdbcType="NUMERIC" />
+            <result property="language" column="LANGUAGE" jdbcType="VARCHAR" />
+            <result property="rating" column="RATING" jdbcType="VARCHAR" />
+            <result property="copyright" column="COPYRIGHT" jdbcType="VARCHAR" />
+            <result property="generator" column="GENERATOR" jdbcType="VARCHAR" />
+            <result property="ttl" column="TTL" jdbcType="NUMERIC" />
+            <result property="rssType" column="RSS_TYPE" jdbcType="NUMERIC" />
+            <result property="lastUpdDate" column="LAST_UPD_DATE" />
+            <result property="referCount" column="REFER_COUNT" jdbcType="NUMERIC" />
+            <result property="updCycle" column="UPD_CYCLE" jdbcType="NUMERIC" />
+            <result property="description" column="DESCRIPTION" jdbcType="VARCHAR" />
+            <result property="udpCycle" column="UDP_CYCLE" jdbcType="NUMERIC" />
+
+	</resultMap>
+	
+	<!-- selectById -->
+    <select id="get" resultMap="Feed">
+    	<![CDATA[
+       		SELECT ID,TITLE,LINK,URL,IMAGE_ID,LANGUAGE,RATING,COPYRIGHT,GENERATOR,TTL,RSS_TYPE,LAST_UPD_DATE,REFER_COUNT,UPD_CYCLE,DESCRIPTION,UDP_CYCLE FROM FEED WHERE ID=#{id}
+       	]]>
+    </select>
+    
+    <select id="selectAll" resultMap="Feed">
+    	<![CDATA[
+    		SELECT ID,TITLE,LINK,URL,IMAGE_ID,LANGUAGE,RATING,COPYRIGHT,GENERATOR,TTL,RSS_TYPE,LAST_UPD_DATE,REFER_COUNT,UPD_CYCLE,DESCRIPTION,UDP_CYCLE FROM FEED 
+    	]]>
+    </select>
+    
+    <select id="countAll" resultType="java.lang.Integer">
+    	<![CDATA[
+    		SELECT COUNT(ID)  FROM FEED
+    	]]>
+    </select>
+    
+    <select id="selectByModel" resultMap="Feed" parameterType="com.lmg.rss.feed.model.Feed">
+    	<![CDATA[
+	    	SELECT ID,TITLE,LINK,URL,IMAGE_ID,LANGUAGE,RATING,COPYRIGHT,GENERATOR,TTL,RSS_TYPE,LAST_UPD_DATE,REFER_COUNT,UPD_CYCLE,DESCRIPTION,UDP_CYCLE FROM FEED 
+	    	WHERE 1=1 
+    	]]>
+    	    <if test=" id != null and id != '' "> AND  ID=#{id} </if>
+            <if test=" title != null and title != '' "> AND  TITLE=#{title} </if>
+            <if test=" link != null and link != '' "> AND  LINK=#{link} </if>
+            <if test=" url != null and url != '' "> AND  URL=#{url} </if>
+            <if test=" imageId != null and imageId != '' "> AND  IMAGE_ID=#{imageId} </if>
+            <if test=" language != null and language != '' "> AND  LANGUAGE=#{language} </if>
+            <if test=" rating != null and rating != '' "> AND  RATING=#{rating} </if>
+            <if test=" copyright != null and copyright != '' "> AND  COPYRIGHT=#{copyright} </if>
+            <if test=" generator != null and generator != '' "> AND  GENERATOR=#{generator} </if>
+            <if test=" ttl != null and ttl != '' "> AND  TTL=#{ttl} </if>
+            <if test=" rssType != null and rssType != '' "> AND  RSS_TYPE=#{rssType} </if>
+            <if test=" lastUpdDate != null and lastUpdDate != '' "> AND  LAST_UPD_DATE=#{lastUpdDate} </if>
+            <if test=" referCount != null and referCount != '' "> AND  REFER_COUNT=#{referCount} </if>
+            <if test=" updCycle != null and updCycle != '' "> AND  UPD_CYCLE=#{updCycle} </if>
+            <if test=" description != null and description != '' "> AND  DESCRIPTION=#{description} </if>
+            <if test=" udpCycle != null and udpCycle != '' "> AND  UDP_CYCLE=#{udpCycle} </if>
+
+        	<if test=" orderBy !=null and orderBy!='' ">
+                order by ${orderBy}
+            </if>
+    </select>
+    
+    <select id="selectByMap" resultMap="Feed" parameterType="java.util.Map">
+    	<![CDATA[
+	    	SELECT ID,TITLE,LINK,URL,IMAGE_ID,LANGUAGE,RATING,COPYRIGHT,GENERATOR,TTL,RSS_TYPE,LAST_UPD_DATE,REFER_COUNT,UPD_CYCLE,DESCRIPTION,UDP_CYCLE FROM FEED 
+	    	WHERE 1=1 
+    	]]>
+    	    <if test=" id != null and id != '' "> AND  ID=#{id} </if>
+            <if test=" title != null and title != '' "> AND  TITLE=#{title} </if>
+            <if test=" link != null and link != '' "> AND  LINK=#{link} </if>
+            <if test=" url != null and url != '' "> AND  URL=#{url} </if>
+            <if test=" imageId != null and imageId != '' "> AND  IMAGE_ID=#{imageId} </if>
+            <if test=" language != null and language != '' "> AND  LANGUAGE=#{language} </if>
+            <if test=" rating != null and rating != '' "> AND  RATING=#{rating} </if>
+            <if test=" copyright != null and copyright != '' "> AND  COPYRIGHT=#{copyright} </if>
+            <if test=" generator != null and generator != '' "> AND  GENERATOR=#{generator} </if>
+            <if test=" ttl != null and ttl != '' "> AND  TTL=#{ttl} </if>
+            <if test=" rssType != null and rssType != '' "> AND  RSS_TYPE=#{rssType} </if>
+            <if test=" lastUpdDate != null and lastUpdDate != '' "> AND  LAST_UPD_DATE=#{lastUpdDate} </if>
+            <if test=" referCount != null and referCount != '' "> AND  REFER_COUNT=#{referCount} </if>
+            <if test=" updCycle != null and updCycle != '' "> AND  UPD_CYCLE=#{updCycle} </if>
+            <if test=" description != null and description != '' "> AND  DESCRIPTION=#{description} </if>
+            <if test=" udpCycle != null and udpCycle != '' "> AND  UDP_CYCLE=#{udpCycle} </if>
+
+        	<if test=" orderBy !=null and orderBy!='' ">
+                order by ${orderBy}
+            </if>
+    </select>   
+    
+    <select id="countByMap"  resultType="java.lang.Integer" parameterType="java.util.Map">
+    	<![CDATA[
+	    	SELECT COUNT(ID)  FROM FEED 
+	    	WHERE 1=1 
+    	]]>
+    	    <if test=" id != null and id != '' "> AND  ID=#{id} </if>
+            <if test=" title != null and title != '' "> AND  TITLE=#{title} </if>
+            <if test=" link != null and link != '' "> AND  LINK=#{link} </if>
+            <if test=" url != null and url != '' "> AND  URL=#{url} </if>
+            <if test=" imageId != null and imageId != '' "> AND  IMAGE_ID=#{imageId} </if>
+            <if test=" language != null and language != '' "> AND  LANGUAGE=#{language} </if>
+            <if test=" rating != null and rating != '' "> AND  RATING=#{rating} </if>
+            <if test=" copyright != null and copyright != '' "> AND  COPYRIGHT=#{copyright} </if>
+            <if test=" generator != null and generator != '' "> AND  GENERATOR=#{generator} </if>
+            <if test=" ttl != null and ttl != '' "> AND  TTL=#{ttl} </if>
+            <if test=" rssType != null and rssType != '' "> AND  RSS_TYPE=#{rssType} </if>
+            <if test=" lastUpdDate != null and lastUpdDate != '' "> AND  LAST_UPD_DATE=#{lastUpdDate} </if>
+            <if test=" referCount != null and referCount != '' "> AND  REFER_COUNT=#{referCount} </if>
+            <if test=" updCycle != null and updCycle != '' "> AND  UPD_CYCLE=#{updCycle} </if>
+            <if test=" description != null and description != '' "> AND  DESCRIPTION=#{description} </if>
+            <if test=" udpCycle != null and udpCycle != '' "> AND  UDP_CYCLE=#{udpCycle} </if>
+
+    </select>  
+    
+    <select id="selectByLike" resultMap="Feed" parameterType="java.util.Map">
+    	<![CDATA[
+	    	SELECT ID,TITLE,LINK,URL,IMAGE_ID,LANGUAGE,RATING,COPYRIGHT,GENERATOR,TTL,RSS_TYPE,LAST_UPD_DATE,REFER_COUNT,UPD_CYCLE,DESCRIPTION,UDP_CYCLE FROM FEED 
+	    	WHERE 1=1 
+    	]]>
+            <if test=" id != null and id != '' "> AND  ID=#{id} </if>
+            <if test=" title != null and title != '' " > AND TITLE LIKE CONCAT('%',#{title},'%') </if>
+            <if test=" link != null and link != '' " > AND LINK LIKE CONCAT('%',#{link},'%') </if>
+            <if test=" url != null and url != '' " > AND URL LIKE CONCAT('%',#{url},'%') </if>
+            <if test=" imageId != null and imageId != '' "> AND  IMAGE_ID=#{imageId} </if>
+            <if test=" language != null and language != '' " > AND LANGUAGE LIKE CONCAT('%',#{language},'%') </if>
+            <if test=" rating != null and rating != '' " > AND RATING LIKE CONCAT('%',#{rating},'%') </if>
+            <if test=" copyright != null and copyright != '' " > AND COPYRIGHT LIKE CONCAT('%',#{copyright},'%') </if>
+            <if test=" generator != null and generator != '' " > AND GENERATOR LIKE CONCAT('%',#{generator},'%') </if>
+            <if test=" ttl != null and ttl != '' "> AND  TTL=#{ttl} </if>
+            <if test=" rssType != null and rssType != '' "> AND  RSS_TYPE=#{rssType} </if>
+            <if test=" lastUpdDate != null and lastUpdDate != '' "> AND  LAST_UPD_DATE=#{lastUpdDate} </if>
+            <if test=" referCount != null and referCount != '' "> AND  REFER_COUNT=#{referCount} </if>
+            <if test=" updCycle != null and updCycle != '' "> AND  UPD_CYCLE=#{updCycle} </if>
+            <if test=" description != null and description != '' " > AND DESCRIPTION LIKE CONCAT('%',#{description},'%') </if>
+            <if test=" udpCycle != null and udpCycle != '' "> AND  UDP_CYCLE=#{udpCycle} </if>
+
+            <if test=" orderBy !=null and orderBy!='' ">
+                order by ${orderBy}
+            </if>
+     </select>
+    
+    <insert id="insert" parameterType="com.lmg.rss.feed.model.Feed" useGeneratedKeys="true" keyProperty="id">
+        
+    	<![CDATA[
+    		INSERT INTO FEED( TITLE,LINK,URL,IMAGE_ID,LANGUAGE,RATING,COPYRIGHT,GENERATOR,TTL,RSS_TYPE,LAST_UPD_DATE,REFER_COUNT,UPD_CYCLE,DESCRIPTION,UDP_CYCLE ) VALUES (#{title},#{link},#{url},#{imageId},#{language},#{rating},#{copyright},#{generator},#{ttl},#{rssType},#{lastUpdDate},#{referCount},#{updCycle},#{description},#{udpCycle} )
+    	]]>
+    </insert>
+
+	
+	<update id="update" parameterType="com.lmg.rss.feed.model.Feed">
+		<![CDATA[
+			UPDATE FEED SET ID=#{id},TITLE=#{title},LINK=#{link},URL=#{url},IMAGE_ID=#{imageId},LANGUAGE=#{language},RATING=#{rating},COPYRIGHT=#{copyright},GENERATOR=#{generator},TTL=#{ttl},RSS_TYPE=#{rssType},LAST_UPD_DATE=#{lastUpdDate},REFER_COUNT=#{referCount},UPD_CYCLE=#{updCycle},DESCRIPTION=#{description},UDP_CYCLE=#{udpCycle} WHERE ID=#{id}
+		]]>
+	</update>   
+	
+	<delete id="delete">
+		DELETE FROM FEED WHERE ID = #{id}
+	</delete>
+    
+    
+    
+    <select id="selectFeedsByUser" resultType="com.lmg.rss.feed.model.Feed" parameterType="java.util.Map">
+        <![CDATA[
+            SELECT ID,TITLE,LINK,URL,IMAGE_ID,LANGUAGE,RATING,COPYRIGHT,GENERATOR,TTL,RSS_TYPE,LAST_UPD_DATE,REFER_COUNT,UPD_CYCLE,DESCRIPTION,UDP_CYCLE FROM FEED 
+            inner join user_feed on FEED.id=user_feed.feed_id
+            WHERE user_feed.user_id=#{userId}
+        ]]>
+            <if test=" id != null and id != '' " > AND id=#{ID} </if>
+            <if test=" parentId != null and parentId != '' "> AND  PARENT_ID=#{parentId} </if>
+            <if test=" level != null and level != '' "> AND  LEVEL=#{level} </if>
+            <if test=" name != null and name != '' "> AND  NAME=#{name} </if>
+            <if test=" createUser != null and createUser != '' "> AND  CREATE_USER=#{createUser} </if>
+            <if test=" createTime != null and createTime != '' "> AND  CREATE_TIME=#{createTime} </if>
+            <if test=" updateUser != null and updateUser != '' "> AND  UPDATE_USER=#{updateUser} </if>
+            <if test=" updateTime != null and updateTime != '' "> AND  UPDATE_TIME=#{updateTime} </if>
+
+    </select> 
+</mapper>

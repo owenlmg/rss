@@ -201,7 +201,7 @@ public class HttpRequest {
             EntityUtils.consume(entity);
             return result;
         } catch (Exception e){
-            log.error("get执行错误,url:" + url + ",error:" + e.getMessage());
+            log.error("get执行错误,url:" + url + ",error:" + e.getMessage(), e);
         } finally{
             try{
                 if (response != null)
@@ -301,8 +301,13 @@ public class HttpRequest {
     
     
     public static void main(String[] args) throws JSONException {
-        String result = sendGet("https://api.weixin.qq.com/sns/jscode2session?appid=wxf1ad00155fc2762b&secret=8885ef2f20bbc5ba6590628458ce7a41&js_code=013E1fju1LlpQc0oa2hu1g2hju1E1fj4&grant_type=authorization_code", Charset.forName("UTF-8"));
+        // String result =
+        // sendGet("https://api.weixin.qq.com/sns/jscode2session?appid=wxf1ad00155fc2762b&secret=8885ef2f20bbc5ba6590628458ce7a41&js_code=013E1fju1LlpQc0oa2hu1g2hju1E1fj4&grant_type=authorization_code",
+        // Charset.forName("UTF-8"));
+        String url = "http://www.123gps.com.cn/rest/interface/getTmpByVehicleNo?vehicleNo=沪A11111&password=JY001&startTime=2017-11-15%2014:25:29&endTime=2017-11-17%2010:25:29&hasLocation=1&userName=JY001";
+        
+        String result = sendGet(url, Charset.forName("UTF-8"));
         JSONObject jsonObject = new JSONObject(result);
-        System.out.println(jsonObject.get("errcode"));
+        System.out.println(jsonObject);
     }
 }

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.lmg.rss.feed.model.User">
+
+	<resultMap type="com.lmg.rss.feed.model.User" id="User" autoMapping="true">
+		    <result property="id" column="ID" jdbcType="NUMERIC" />
+            <result property="loginName" column="LOGIN_NAME" jdbcType="VARCHAR" />
+            <result property="loginPass" column="LOGIN_PASS" jdbcType="VARCHAR" />
+            <result property="nickname" column="NICKNAME" jdbcType="VARCHAR" />
+            <result property="openId" column="OPEN_ID" jdbcType="VARCHAR" />
+            <result property="sessionKey" column="SESSION_KEY" jdbcType="VARCHAR" />
+            <result property="session" column="SESSION" jdbcType="VARCHAR" />
+            <result property="sex" column="SEX" jdbcType="NUMERIC" />
+            <result property="headImgUrl" column="HEAD_IMG_URL" jdbcType="VARCHAR" />
+            <result property="city" column="CITY" jdbcType="VARCHAR" />
+            <result property="province" column="PROVINCE" jdbcType="VARCHAR" />
+            <result property="country" column="COUNTRY" jdbcType="VARCHAR" />
+            <result property="language" column="LANGUAGE" jdbcType="VARCHAR" />
+            <result property="createTime" column="CREATE_TIME" />
+            <result property="lastUseTime" column="LAST_USE_TIME" />
+
+	</resultMap>
+	
+	<!-- selectById -->
+    <select id="get" resultMap="User">
+    	<![CDATA[
+       		SELECT ID,LOGIN_NAME,LOGIN_PASS,NICKNAME,OPEN_ID,SESSION_KEY,SESSION,SEX,HEAD_IMG_URL,CITY,PROVINCE,COUNTRY,LANGUAGE,CREATE_TIME,LAST_USE_TIME FROM USER WHERE ID=#{id}
+       	]]>
+    </select>
+    
+    <select id="selectAll" resultMap="User">
+    	<![CDATA[
+    		SELECT ID,LOGIN_NAME,LOGIN_PASS,NICKNAME,OPEN_ID,SESSION_KEY,SESSION,SEX,HEAD_IMG_URL,CITY,PROVINCE,COUNTRY,LANGUAGE,CREATE_TIME,LAST_USE_TIME FROM USER 
+    	]]>
+    </select>
+    
+    <select id="countAll" resultType="java.lang.Integer">
+    	<![CDATA[
+    		SELECT COUNT(ID)  FROM USER
+    	]]>
+    </select>
+    
+    <select id="selectByModel" resultMap="User" parameterType="com.lmg.rss.feed.model.User">
+    	<![CDATA[
+	    	SELECT ID,LOGIN_NAME,LOGIN_PASS,NICKNAME,OPEN_ID,SESSION_KEY,SESSION,SEX,HEAD_IMG_URL,CITY,PROVINCE,COUNTRY,LANGUAGE,CREATE_TIME,LAST_USE_TIME FROM USER 
+	    	WHERE 1=1 
+    	]]>
+    	    <if test=" id != null and id != '' "> AND  ID=#{id} </if>
+            <if test=" loginName != null and loginName != '' "> AND  LOGIN_NAME=#{loginName} </if>
+            <if test=" loginPass != null and loginPass != '' "> AND  LOGIN_PASS=#{loginPass} </if>
+            <if test=" nickname != null and nickname != '' "> AND  NICKNAME=#{nickname} </if>
+            <if test=" openId != null and openId != '' "> AND  OPEN_ID=#{openId} </if>
+            <if test=" sessionKey != null and sessionKey != '' "> AND  SESSION_KEY=#{sessionKey} </if>
+            <if test=" session != null and session != '' "> AND  SESSION=#{session} </if>
+            <if test=" sex != null and sex != '' "> AND  SEX=#{sex} </if>
+            <if test=" headImgUrl != null and headImgUrl != '' "> AND  HEAD_IMG_URL=#{headImgUrl} </if>
+            <if test=" city != null and city != '' "> AND  CITY=#{city} </if>
+            <if test=" province != null and province != '' "> AND  PROVINCE=#{province} </if>
+            <if test=" country != null and country != '' "> AND  COUNTRY=#{country} </if>
+            <if test=" language != null and language != '' "> AND  LANGUAGE=#{language} </if>
+            <if test=" createTime != null and createTime != '' "> AND  CREATE_TIME=#{createTime} </if>
+            <if test=" lastUseTime != null and lastUseTime != '' "> AND  LAST_USE_TIME=#{lastUseTime} </if>
+
+        	<if test=" orderBy !=null and orderBy!='' ">
+                order by ${orderBy}
+            </if>
+    </select>
+    
+    <select id="selectByMap" resultMap="User" parameterType="java.util.Map">
+    	<![CDATA[
+	    	SELECT ID,LOGIN_NAME,LOGIN_PASS,NICKNAME,OPEN_ID,SESSION_KEY,SESSION,SEX,HEAD_IMG_URL,CITY,PROVINCE,COUNTRY,LANGUAGE,CREATE_TIME,LAST_USE_TIME FROM USER 
+	    	WHERE 1=1 
+    	]]>
+    	    <if test=" id != null and id != '' "> AND  ID=#{id} </if>
+            <if test=" loginName != null and loginName != '' "> AND  LOGIN_NAME=#{loginName} </if>
+            <if test=" loginPass != null and loginPass != '' "> AND  LOGIN_PASS=#{loginPass} </if>
+            <if test=" nickname != null and nickname != '' "> AND  NICKNAME=#{nickname} </if>
+            <if test=" openId != null and openId != '' "> AND  OPEN_ID=#{openId} </if>
+            <if test=" sessionKey != null and sessionKey != '' "> AND  SESSION_KEY=#{sessionKey} </if>
+            <if test=" session != null and session != '' "> AND  SESSION=#{session} </if>
+            <if test=" sex != null and sex != '' "> AND  SEX=#{sex} </if>
+            <if test=" headImgUrl != null and headImgUrl != '' "> AND  HEAD_IMG_URL=#{headImgUrl} </if>
+            <if test=" city != null and city != '' "> AND  CITY=#{city} </if>
+            <if test=" province != null and province != '' "> AND  PROVINCE=#{province} </if>
+            <if test=" country != null and country != '' "> AND  COUNTRY=#{country} </if>
+            <if test=" language != null and language != '' "> AND  LANGUAGE=#{language} </if>
+            <if test=" createTime != null and createTime != '' "> AND  CREATE_TIME=#{createTime} </if>
+            <if test=" lastUseTime != null and lastUseTime != '' "> AND  LAST_USE_TIME=#{lastUseTime} </if>
+
+        	<if test=" orderBy !=null and orderBy!='' ">
+                order by ${orderBy}
+            </if>
+    </select>   
+    
+    <select id="countByMap"  resultType="java.lang.Integer" parameterType="java.util.Map">
+    	<![CDATA[
+	    	SELECT COUNT(ID)  FROM USER 
+	    	WHERE 1=1 
+    	]]>
+    	    <if test=" id != null and id != '' "> AND  ID=#{id} </if>
+            <if test=" loginName != null and loginName != '' "> AND  LOGIN_NAME=#{loginName} </if>
+            <if test=" loginPass != null and loginPass != '' "> AND  LOGIN_PASS=#{loginPass} </if>
+            <if test=" nickname != null and nickname != '' "> AND  NICKNAME=#{nickname} </if>
+            <if test=" openId != null and openId != '' "> AND  OPEN_ID=#{openId} </if>
+            <if test=" sessionKey != null and sessionKey != '' "> AND  SESSION_KEY=#{sessionKey} </if>
+            <if test=" session != null and session != '' "> AND  SESSION=#{session} </if>
+            <if test=" sex != null and sex != '' "> AND  SEX=#{sex} </if>
+            <if test=" headImgUrl != null and headImgUrl != '' "> AND  HEAD_IMG_URL=#{headImgUrl} </if>
+            <if test=" city != null and city != '' "> AND  CITY=#{city} </if>
+            <if test=" province != null and province != '' "> AND  PROVINCE=#{province} </if>
+            <if test=" country != null and country != '' "> AND  COUNTRY=#{country} </if>
+            <if test=" language != null and language != '' "> AND  LANGUAGE=#{language} </if>
+            <if test=" createTime != null and createTime != '' "> AND  CREATE_TIME=#{createTime} </if>
+            <if test=" lastUseTime != null and lastUseTime != '' "> AND  LAST_USE_TIME=#{lastUseTime} </if>
+
+    </select>  
+    
+    <select id="selectByLike" resultMap="User" parameterType="java.util.Map">
+    	<![CDATA[
+	    	SELECT ID,LOGIN_NAME,LOGIN_PASS,NICKNAME,OPEN_ID,SESSION_KEY,SESSION,SEX,HEAD_IMG_URL,CITY,PROVINCE,COUNTRY,LANGUAGE,CREATE_TIME,LAST_USE_TIME FROM USER 
+	    	WHERE 1=1 
+    	]]>
+            <if test=" id != null and id != '' "> AND  ID=#{id} </if>
+            <if test=" loginName != null and loginName != '' " > AND LOGIN_NAME LIKE CONCAT('%',#{loginName},'%') </if>
+            <if test=" loginPass != null and loginPass != '' " > AND LOGIN_PASS LIKE CONCAT('%',#{loginPass},'%') </if>
+            <if test=" nickname != null and nickname != '' " > AND NICKNAME LIKE CONCAT('%',#{nickname},'%') </if>
+            <if test=" openId != null and openId != '' " > AND OPEN_ID LIKE CONCAT('%',#{openId},'%') </if>
+            <if test=" sessionKey != null and sessionKey != '' " > AND SESSION_KEY LIKE CONCAT('%',#{sessionKey},'%') </if>
+            <if test=" session != null and session != '' " > AND SESSION LIKE CONCAT('%',#{session},'%') </if>
+            <if test=" sex != null and sex != '' "> AND  SEX=#{sex} </if>
+            <if test=" headImgUrl != null and headImgUrl != '' " > AND HEAD_IMG_URL LIKE CONCAT('%',#{headImgUrl},'%') </if>
+            <if test=" city != null and city != '' " > AND CITY LIKE CONCAT('%',#{city},'%') </if>
+            <if test=" province != null and province != '' " > AND PROVINCE LIKE CONCAT('%',#{province},'%') </if>
+            <if test=" country != null and country != '' " > AND COUNTRY LIKE CONCAT('%',#{country},'%') </if>
+            <if test=" language != null and language != '' " > AND LANGUAGE LIKE CONCAT('%',#{language},'%') </if>
+            <if test=" createTime != null and createTime != '' "> AND  CREATE_TIME=#{createTime} </if>
+            <if test=" lastUseTime != null and lastUseTime != '' "> AND  LAST_USE_TIME=#{lastUseTime} </if>
+
+            <if test=" orderBy !=null and orderBy!='' ">
+                order by ${orderBy}
+            </if>
+     </select>
+    
+    <insert id="insert" parameterType="com.lmg.rss.feed.model.User" useGeneratedKeys="true" keyProperty="id">
+        
+    	<![CDATA[
+    		INSERT INTO USER( LOGIN_NAME,LOGIN_PASS,NICKNAME,OPEN_ID,SESSION_KEY,SESSION,SEX,HEAD_IMG_URL,CITY,PROVINCE,COUNTRY,LANGUAGE,CREATE_TIME,LAST_USE_TIME ) VALUES (#{loginName},#{loginPass},#{nickname},#{openId},#{sessionKey},#{session},#{sex},#{headImgUrl},#{city},#{province},#{country},#{language},#{createTime},#{lastUseTime} )
+    	]]>
+    </insert>
+
+	
+	<update id="update" parameterType="com.lmg.rss.feed.model.User">
+		<![CDATA[
+			UPDATE USER SET ID=#{id},LOGIN_NAME=#{loginName},LOGIN_PASS=#{loginPass},NICKNAME=#{nickname},OPEN_ID=#{openId},SESSION_KEY=#{sessionKey},SESSION=#{session},SEX=#{sex},HEAD_IMG_URL=#{headImgUrl},CITY=#{city},PROVINCE=#{province},COUNTRY=#{country},LANGUAGE=#{language},CREATE_TIME=#{createTime},LAST_USE_TIME=#{lastUseTime} WHERE ID=#{id}
+		]]>
+	</update>   
+	
+	<delete id="delete">
+		DELETE FROM USER WHERE ID = #{id}
+	</delete>
+    
+</mapper>

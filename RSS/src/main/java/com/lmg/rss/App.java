@@ -9,8 +9,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.lmg.rss.feed.dao.FeedRepository;
-import com.lmg.rss.feed.dao.ItemRepository;
+import com.lmg.rss.feed.service.FeedManager;
+import com.lmg.rss.feed.service.ItemManager;
 import com.lmg.rss.listeners.MyApplicationListener;
 import com.lmg.rss.util.FetchFeed;
 
@@ -25,10 +25,10 @@ import com.lmg.rss.util.FetchFeed;
 public class App implements CommandLineRunner {
     
     @Autowired
-    FeedRepository         feedRepository;
+    private FeedManager feedManager;
     
     @Autowired
-    private ItemRepository itemRepository;
+    private ItemManager itemManager;
     
     
     public static void main(String[] args) {
@@ -48,7 +48,7 @@ public class App implements CommandLineRunner {
      */
     public void run(String... args) throws Exception {
         // 定时任务
-        new FetchFeed(feedRepository, itemRepository).start();
+        new FetchFeed(feedManager, itemManager).start();
     }
     
 }

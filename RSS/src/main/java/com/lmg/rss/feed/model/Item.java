@@ -1,185 +1,160 @@
 /**
- * @Title: Rss.java
- * @Package com.lmg.springboot.feed.model
+ * @Title: ItemMapper.java
+ * @Package com.lmg.rss.feed.model
  */
 package com.lmg.rss.feed.model;
 
-import java.io.Serializable;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
+import com.lmg.rss.common.model.BaseModel;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-/***********************************
- * @ClassName: Rss.java
- * @Description: TODO
- * @author: Luomingguo
- * @createdAt: 2017年11月8日下午3:07:39
- ***********************************/
-
-@Entity
-@Table(name = "item")
-@JsonIgnoreProperties({ "feed" })
-public class Item implements Serializable {
+public class Item extends BaseModel {
     /**
-     * @Fields serialVersionUID:TODO
+     * @Fields serialVersionUID:序列
      */
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int               id;
-    // private int feedId;
-    private String            title;
-    private String            link;
-    private String            author;
-    private String            category;
-    private Timestamp         pubDate;
-    private String            comments;
-    private String            descriptionType;
-    private String            descriptionValue;
-    private String            firstImg;
+    private static final long  serialVersionUID = 1L;
     
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "feed_id")
-    private Feed              feed;
-    private String            pubDateStr;
-    private String            feedName;
+    /**
+     * 表名
+     */
+    public final static String TABLE_NAME       = "ITEM";
+    private java.lang.String   title;
+    private java.lang.String   link;
+    private java.lang.String   author;
+    private java.lang.String   category;
+    private java.sql.Timestamp pubDate;
+    private java.lang.String   comments;
+    private java.lang.String   descriptionType;
+    private java.lang.String   descriptionValue;
+    private java.lang.Integer  feedId;
+    private java.lang.String   firstImg;
+    private java.lang.String   pubDateStr;
+    private java.lang.String   feedName;
     
     
-    public int getId() {
-        return id;
-    }
-    
-    
-    public void setId(int id) {
-        this.id = id;
-    }
-    
-    
-    // public int getFeedId() {
-    // return feedId;
-    // }
-    //
-    //
-    // public void setFeedId(int feedId) {
-    // this.feedId = feedId;
-    // }
-    
-    public String getTitle() {
+    public java.lang.String getTitle() {
         return title;
     }
     
     
-    public void setTitle(String title) {
+    public void setTitle(java.lang.String title) {
         this.title = title;
     }
     
     
-    public String getLink() {
+    public java.lang.String getLink() {
         return link;
     }
     
     
-    public void setLink(String link) {
+    public void setLink(java.lang.String link) {
         this.link = link;
     }
     
     
-    public String getAuthor() {
+    public java.lang.String getAuthor() {
         return author;
     }
     
     
-    public void setAuthor(String author) {
+    public void setAuthor(java.lang.String author) {
         this.author = author;
     }
     
     
-    public String getCategory() {
+    public java.lang.String getCategory() {
         return category;
     }
     
     
-    public void setCategory(String category) {
+    public void setCategory(java.lang.String category) {
         this.category = category;
     }
     
     
-    public Timestamp getPubDate() {
+    public java.sql.Timestamp getPubDate() {
         return pubDate;
     }
     
     
-    public void setPubDate(Timestamp pubDate) {
+    public void setPubDate(java.sql.Timestamp pubDate) {
         this.pubDate = pubDate;
     }
     
     
-    public String getComments() {
+    public java.lang.String getComments() {
         return comments;
     }
     
     
-    public void setComments(String comments) {
+    public void setComments(java.lang.String comments) {
         this.comments = comments;
     }
     
     
-    public String getDescriptionType() {
+    public java.lang.String getDescriptionType() {
         return descriptionType;
     }
     
     
-    public void setDescriptionType(String descriptionType) {
+    public void setDescriptionType(java.lang.String descriptionType) {
         this.descriptionType = descriptionType;
     }
     
     
-    public String getDescriptionValue() {
+    public java.lang.String getDescriptionValue() {
         return descriptionValue;
     }
     
     
-    public void setDescriptionValue(String descriptionValue) {
+    public void setDescriptionValue(java.lang.String descriptionValue) {
         this.descriptionValue = descriptionValue;
     }
     
     
-    public String getFirstImg() {
+    public java.lang.Integer getFeedId() {
+        return feedId;
+    }
+    
+    
+    public void setFeedId(java.lang.Integer feedId) {
+        this.feedId = feedId;
+    }
+    
+    
+    public java.lang.String getFirstImg() {
         return firstImg;
     }
     
     
-    public void setFirstImg(String firstImg) {
+    public void setFirstImg(java.lang.String firstImg) {
         this.firstImg = firstImg;
     }
     
     
-    public Feed getFeed() {
-        return feed;
+    public java.lang.String getPubDateStr() {
+        return pubDateStr;
     }
     
     
-    public void setFeed(Feed feed) {
-        this.feed = feed;
+    public void setPubDateStr(java.lang.String pubDateStr) {
+        this.pubDateStr = pubDateStr;
     }
     
     
-    public String getPubDateStr() {
-        return new SimpleDateFormat("yyyy-MM-dd hh:mm").format(pubDate);
+    public java.lang.String getFeedName() {
+        return feedName;
     }
     
     
-    public String getFeedName() {
-        return feed == null ? "" : feed.getTitle();
+    public void setFeedName(java.lang.String feedName) {
+        this.feedName = feedName;
+    }
+    
+    
+    @Override
+    public String toString() {
+        return "ITEM [title= " + title + ", link= " + link + ", author= " + author + ", category= " + category
+                + ", pubDate= " + pubDate + ", comments= " + comments + ", descriptionType= " + descriptionType
+                + ", descriptionValue= " + descriptionValue + ", feedId= " + feedId + ", firstImg= " + firstImg
+                + ", pubDateStr= " + pubDateStr + ", feedName= " + feedName + "]";
     }
 }

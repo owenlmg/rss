@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.lmg.rss.feed.model.UserItem">
+
+	<resultMap type="com.lmg.rss.feed.model.UserItem" id="UserItem" autoMapping="true">
+		    <result property="userId" column="USER_ID" jdbcType="NUMERIC" />
+            <result property="itemId" column="ITEM_ID" jdbcType="NUMERIC" />
+
+	</resultMap>
+	
+	<!-- selectById -->
+    <select id="get" resultMap="UserItem">
+    	<![CDATA[
+       		SELECT USER_ID,ITEM_ID FROM USER_ITEM WHERE ITEM_ID=#{itemId}
+       	]]>
+    </select>
+    
+    <select id="selectAll" resultMap="UserItem">
+    	<![CDATA[
+    		SELECT USER_ID,ITEM_ID FROM USER_ITEM 
+    	]]>
+    </select>
+    
+    <select id="countAll" resultType="java.lang.Integer">
+    	<![CDATA[
+    		SELECT COUNT(ITEM_ID)  FROM USER_ITEM
+    	]]>
+    </select>
+    
+    <select id="selectByModel" resultMap="UserItem" parameterType="com.lmg.rss.feed.model.UserItem">
+    	<![CDATA[
+	    	SELECT USER_ID,ITEM_ID FROM USER_ITEM 
+	    	WHERE 1=1 
+    	]]>
+    	    <if test=" userId != null and userId != '' "> AND  USER_ID=#{userId} </if>
+            <if test=" itemId != null and itemId != '' "> AND  ITEM_ID=#{itemId} </if>
+
+        	<if test=" orderBy !=null and orderBy!='' ">
+                order by ${orderBy}
+            </if>
+    </select>
+    
+    <select id="selectByMap" resultMap="UserItem" parameterType="java.util.Map">
+    	<![CDATA[
+	    	SELECT USER_ID,ITEM_ID FROM USER_ITEM 
+	    	WHERE 1=1 
+    	]]>
+    	    <if test=" userId != null and userId != '' "> AND  USER_ID=#{userId} </if>
+            <if test=" itemId != null and itemId != '' "> AND  ITEM_ID=#{itemId} </if>
+
+        	<if test=" orderBy !=null and orderBy!='' ">
+                order by ${orderBy}
+            </if>
+    </select>   
+    
+    <select id="countByMap"  resultType="java.lang.Integer" parameterType="java.util.Map">
+    	<![CDATA[
+	    	SELECT COUNT(ITEM_ID)  FROM USER_ITEM 
+	    	WHERE 1=1 
+    	]]>
+    	    <if test=" userId != null and userId != '' "> AND  USER_ID=#{userId} </if>
+            <if test=" itemId != null and itemId != '' "> AND  ITEM_ID=#{itemId} </if>
+
+    </select>  
+    
+    <select id="selectByLike" resultMap="UserItem" parameterType="java.util.Map">
+    	<![CDATA[
+	    	SELECT USER_ID,ITEM_ID FROM USER_ITEM 
+	    	WHERE 1=1 
+    	]]>
+            <if test=" userId != null and userId != '' "> AND  USER_ID=#{userId} </if>
+            <if test=" itemId != null and itemId != '' "> AND  ITEM_ID=#{itemId} </if>
+
+            <if test=" orderBy !=null and orderBy!='' ">
+                order by ${orderBy}
+            </if>
+     </select>
+    
+    <insert id="insert" parameterType="com.lmg.rss.feed.model.UserItem" keyProperty="">
+        
+    	<![CDATA[
+    		INSERT INTO USER_ITEM( USER_ID,ITEM_ID ) VALUES (#{userId},#{itemId} )
+    	]]>
+    </insert>
+
+	
+	<update id="update" parameterType="com.lmg.rss.feed.model.UserItem">
+		<![CDATA[
+			UPDATE USER_ITEM SET USER_ID=#{userId},ITEM_ID=#{itemId} WHERE ITEM_ID=#{id}
+		]]>
+	</update>   
+	
+	<delete id="delete">
+		DELETE FROM USER_ITEM WHERE ITEM_ID = #{itemId}
+	</delete>
+    
+</mapper>

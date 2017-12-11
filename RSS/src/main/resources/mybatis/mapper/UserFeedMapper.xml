@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.lmg.rss.feed.model.UserFeed">
+
+	<resultMap type="com.lmg.rss.feed.model.UserFeed" id="UserFeed" autoMapping="true">
+		    <result property="feedId" column="FEED_ID" jdbcType="NUMERIC" />
+            <result property="userId" column="USER_ID" jdbcType="NUMERIC" />
+            <result property="subscribeTime" column="SUBSCRIBE_TIME" />
+
+	</resultMap>
+	
+	<!-- selectById -->
+    <select id="get" resultMap="UserFeed">
+    	<![CDATA[
+       		SELECT FEED_ID,USER_ID,SUBSCRIBE_TIME FROM USER_FEED WHERE FEED_ID=#{feedId} and USER_ID=#{userId}
+       	]]>
+    </select>
+    
+    <select id="selectAll" resultMap="UserFeed">
+    	<![CDATA[
+    		SELECT FEED_ID,USER_ID,SUBSCRIBE_TIME FROM USER_FEED 
+    	]]>
+    </select>
+    
+    <select id="countAll" resultType="java.lang.Integer">
+    	<![CDATA[
+    		SELECT COUNT(FEED_ID)  FROM USER_FEED
+    	]]>
+    </select>
+    
+    <select id="selectByModel" resultMap="UserFeed" parameterType="com.lmg.rss.feed.model.UserFeed">
+    	<![CDATA[
+	    	SELECT FEED_ID,USER_ID,SUBSCRIBE_TIME FROM USER_FEED 
+	    	WHERE 1=1 
+    	]]>
+    	    <if test=" feedId != null and feedId != '' "> AND  FEED_ID=#{feedId} </if>
+            <if test=" userId != null and userId != '' "> AND  USER_ID=#{userId} </if>
+            <if test=" subscribeTime != null and subscribeTime != '' "> AND  SUBSCRIBE_TIME=#{subscribeTime} </if>
+
+        	<if test=" orderBy !=null and orderBy!='' ">
+                order by ${orderBy}
+            </if>
+    </select>
+    
+    <select id="selectByMap" resultMap="UserFeed" parameterType="java.util.Map">
+    	<![CDATA[
+	    	SELECT FEED_ID,USER_ID,SUBSCRIBE_TIME FROM USER_FEED 
+	    	WHERE 1=1 
+    	]]>
+    	    <if test=" feedId != null and feedId != '' "> AND  FEED_ID=#{feedId} </if>
+            <if test=" userId != null and userId != '' "> AND  USER_ID=#{userId} </if>
+            <if test=" subscribeTime != null and subscribeTime != '' "> AND  SUBSCRIBE_TIME=#{subscribeTime} </if>
+
+        	<if test=" orderBy !=null and orderBy!='' ">
+                order by ${orderBy}
+            </if>
+    </select>   
+    
+    <select id="countByMap"  resultType="java.lang.Integer" parameterType="java.util.Map">
+    	<![CDATA[
+	    	SELECT COUNT(FEED_ID)  FROM USER_FEED 
+	    	WHERE 1=1 
+    	]]>
+    	    <if test=" feedId != null and feedId != '' "> AND  FEED_ID=#{feedId} </if>
+            <if test=" userId != null and userId != '' "> AND  USER_ID=#{userId} </if>
+            <if test=" subscribeTime != null and subscribeTime != '' "> AND  SUBSCRIBE_TIME=#{subscribeTime} </if>
+
+    </select>  
+    
+    <select id="selectByLike" resultMap="UserFeed" parameterType="java.util.Map">
+    	<![CDATA[
+	    	SELECT FEED_ID,USER_ID,SUBSCRIBE_TIME FROM USER_FEED 
+	    	WHERE 1=1 
+    	]]>
+            <if test=" feedId != null and feedId != '' "> AND  FEED_ID=#{feedId} </if>
+            <if test=" userId != null and userId != '' "> AND  USER_ID=#{userId} </if>
+            <if test=" subscribeTime != null and subscribeTime != '' "> AND  SUBSCRIBE_TIME=#{subscribeTime} </if>
+
+            <if test=" orderBy !=null and orderBy!='' ">
+                order by ${orderBy}
+            </if>
+     </select>
+    
+    <insert id="insert" parameterType="com.lmg.rss.feed.model.UserFeed" keyProperty="">
+        
+    	<![CDATA[
+    		INSERT INTO USER_FEED( FEED_ID,USER_ID,SUBSCRIBE_TIME ) VALUES (#{feedId},#{userId},#{subscribeTime} )
+    	]]>
+    </insert>
+
+	
+	<update id="update" parameterType="com.lmg.rss.feed.model.UserFeed">
+		<![CDATA[
+			UPDATE USER_FEED SET FEED_ID=#{feedId},USER_ID=#{userId},SUBSCRIBE_TIME=#{subscribeTime} WHERE FEED_ID=#{feedId} and USER_ID=#{userId}
+		]]>
+	</update>   
+	
+	<delete id="delete">
+		DELETE FROM USER_FEED WHERE FEED_ID=#{feedId} and USER_ID=#{userId}
+	</delete>
+    
+</mapper>

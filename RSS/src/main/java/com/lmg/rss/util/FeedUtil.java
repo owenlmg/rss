@@ -175,7 +175,7 @@ public class FeedUtil {
      */
     private static String getFirstImg(String value) {
         String img = null;
-        Pattern pattern = Pattern.compile("<img\\s*src\\s*=\\s*[\'\"](http.*?)[\'\"]\\s");
+        Pattern pattern = Pattern.compile("<img\\s+src\\s*=\\s*[\'\"](https?://[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|])[\'\"]");
         Matcher matcher = pattern.matcher(value);
         if (matcher.find()){
             img = matcher.group(1);

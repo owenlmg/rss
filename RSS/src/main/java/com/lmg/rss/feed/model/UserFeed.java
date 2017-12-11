@@ -1,42 +1,24 @@
 /**
- * @Title: UserFeed.java
- * @Package com.lmg.springboot.sys.model
+ * @Title: UserFeedMapper.java
+ * @Package com.lmg.rss.feed.model
  */
 package com.lmg.rss.feed.model;
 
-import java.io.Serializable;
-import java.sql.Timestamp;
+import com.lmg.rss.common.model.BaseModel;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
-import javax.persistence.Table;
-
-/***********************************
- * @ClassName: UserFeed.java
- * @Description: TODO
- * @author: Luomingguo
- * @createdAt: 2017年11月9日下午1:27:03
- ***********************************/
-
-@Entity
-@Table(name = "user_feed")
-@IdClass(UserFeedPK.class)
-public class UserFeed implements Serializable {
+public class UserFeed extends BaseModel {
+    /**
+     * @Fields serialVersionUID:序列
+     */
+    private static final long  serialVersionUID = 1L;
     
     /**
-     * @Fields serialVersionUID:TODO
+     * 表名
      */
-    private static final long serialVersionUID = 1L;
-    
-    @Id
-    @Column(name = "user_id")
-    private Integer           userId;
-    @Id
-    @Column(name = "feed_id")
-    private Integer           feedId;
-    private Timestamp         subscribeTime;
+    public final static String TABLE_NAME       = "USER_FEED";
+    private java.lang.Integer  feedId;
+    private java.lang.Integer  userId;
+    private java.util.Date     subscribeTime;
     
     
     /**
@@ -48,6 +30,7 @@ public class UserFeed implements Serializable {
      * </p>
      */
     public UserFeed() {
+        // TODO Auto-generated constructor stub
     }
     
     
@@ -58,41 +41,49 @@ public class UserFeed implements Serializable {
      * <p>
      * Description:
      * </p>
+     * 
+     * @param feedId
+     * @param userId
      */
     public UserFeed(Integer userId, Integer feedId) {
-        this.userId = userId;
+        super();
         this.feedId = feedId;
-        this.subscribeTime = new Timestamp(System.currentTimeMillis());
-    }
-    
-    
-    public Integer getUserId() {
-        return userId;
-    }
-    
-    
-    public void setUserId(Integer userId) {
         this.userId = userId;
     }
     
     
-    public Integer getFeedId() {
+    public java.lang.Integer getFeedId() {
         return feedId;
     }
     
     
-    public void setFeedId(Integer feedId) {
+    public void setFeedId(java.lang.Integer feedId) {
         this.feedId = feedId;
     }
     
     
-    public Timestamp getSubscribeTime() {
+    public java.lang.Integer getUserId() {
+        return userId;
+    }
+    
+    
+    public void setUserId(java.lang.Integer userId) {
+        this.userId = userId;
+    }
+    
+    
+    public java.util.Date getSubscribeTime() {
         return subscribeTime;
     }
     
     
-    public void setSubscribeTime(Timestamp subscribeTime) {
+    public void setSubscribeTime(java.util.Date subscribeTime) {
         this.subscribeTime = subscribeTime;
     }
     
+    
+    @Override
+    public String toString() {
+        return "USER_FEED [feedId= " + feedId + ", userId= " + userId + ", subscribeTime= " + subscribeTime + "]";
+    }
 }

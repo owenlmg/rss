@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.lmg.rss.feed.model.Item">
+
+	<resultMap type="com.lmg.rss.feed.model.Item" id="Item" autoMapping="true">
+		    <result property="id" column="ID" jdbcType="NUMERIC" />
+            <result property="title" column="TITLE" jdbcType="VARCHAR" />
+            <result property="link" column="LINK" jdbcType="VARCHAR" />
+            <result property="author" column="AUTHOR" jdbcType="VARCHAR" />
+            <result property="category" column="CATEGORY" jdbcType="VARCHAR" />
+            <result property="pubDate" column="PUB_DATE" />
+            <result property="comments" column="COMMENTS" jdbcType="VARCHAR" />
+            <result property="descriptionType" column="DESCRIPTION_TYPE" jdbcType="VARCHAR" />
+            <result property="descriptionValue" column="DESCRIPTION_VALUE" jdbcType="NUMERIC" />
+            <result property="feedId" column="FEED_ID" jdbcType="NUMERIC" />
+            <result property="firstImg" column="FIRST_IMG" jdbcType="VARCHAR" />
+            <result property="pubDateStr" column="PUB_DATE_STR" jdbcType="VARCHAR" />
+            <result property="feedName" column="FEED_NAME" jdbcType="VARCHAR" />
+
+	</resultMap>
+	
+	<!-- selectById -->
+    <select id="get" resultMap="Item">
+    	<![CDATA[
+       		SELECT ID,TITLE,LINK,AUTHOR,CATEGORY,PUB_DATE,COMMENTS,DESCRIPTION_TYPE,DESCRIPTION_VALUE,FEED_ID,FIRST_IMG,PUB_DATE_STR,FEED_NAME FROM ITEM WHERE ID=#{id}
+       	]]>
+    </select>
+    
+    <select id="selectAll" resultMap="Item">
+    	<![CDATA[
+    		SELECT ID,TITLE,LINK,AUTHOR,CATEGORY,PUB_DATE,COMMENTS,DESCRIPTION_TYPE,DESCRIPTION_VALUE,FEED_ID,FIRST_IMG,PUB_DATE_STR,FEED_NAME FROM ITEM 
+    	]]>
+    </select>
+    
+    <select id="countAll" resultType="java.lang.Integer">
+    	<![CDATA[
+    		SELECT COUNT(ID)  FROM ITEM
+    	]]>
+    </select>
+    
+    <select id="selectByModel" resultMap="Item" parameterType="com.lmg.rss.feed.model.Item">
+    	<![CDATA[
+	    	SELECT ID,TITLE,LINK,AUTHOR,CATEGORY,PUB_DATE,COMMENTS,DESCRIPTION_TYPE,DESCRIPTION_VALUE,FEED_ID,FIRST_IMG,PUB_DATE_STR,FEED_NAME FROM ITEM 
+	    	WHERE 1=1 
+    	]]>
+    	    <if test=" id != null and id != '' "> AND  ID=#{id} </if>
+            <if test=" title != null and title != '' "> AND  TITLE=#{title} </if>
+            <if test=" link != null and link != '' "> AND  LINK=#{link} </if>
+            <if test=" author != null and author != '' "> AND  AUTHOR=#{author} </if>
+            <if test=" category != null and category != '' "> AND  CATEGORY=#{category} </if>
+            <if test=" pubDate != null and pubDate != '' "> AND  PUB_DATE=#{pubDate} </if>
+            <if test=" comments != null and comments != '' "> AND  COMMENTS=#{comments} </if>
+            <if test=" descriptionType != null and descriptionType != '' "> AND  DESCRIPTION_TYPE=#{descriptionType} </if>
+            <if test=" descriptionValue != null and descriptionValue != '' "> AND  DESCRIPTION_VALUE=#{descriptionValue} </if>
+            <if test=" feedId != null and feedId != '' "> AND  FEED_ID=#{feedId} </if>
+            <if test=" firstImg != null and firstImg != '' "> AND  FIRST_IMG=#{firstImg} </if>
+            <if test=" pubDateStr != null and pubDateStr != '' "> AND  PUB_DATE_STR=#{pubDateStr} </if>
+            <if test=" feedName != null and feedName != '' "> AND  FEED_NAME=#{feedName} </if>
+
+        	<if test=" orderBy !=null and orderBy!='' ">
+                order by ${orderBy}
+            </if>
+    </select>
+    
+    <select id="selectByMap" resultMap="Item" parameterType="java.util.Map">
+    	<![CDATA[
+	    	SELECT ID,TITLE,LINK,AUTHOR,CATEGORY,PUB_DATE,COMMENTS,DESCRIPTION_TYPE,DESCRIPTION_VALUE,FEED_ID,FIRST_IMG,PUB_DATE_STR,FEED_NAME FROM ITEM 
+	    	WHERE 1=1 
+    	]]>
+    	    <if test=" id != null and id != '' "> AND  ID=#{id} </if>
+            <if test=" title != null and title != '' "> AND  TITLE=#{title} </if>
+            <if test=" link != null and link != '' "> AND  LINK=#{link} </if>
+            <if test=" author != null and author != '' "> AND  AUTHOR=#{author} </if>
+            <if test=" category != null and category != '' "> AND  CATEGORY=#{category} </if>
+            <if test=" pubDate != null and pubDate != '' "> AND  PUB_DATE=#{pubDate} </if>
+            <if test=" comments != null and comments != '' "> AND  COMMENTS=#{comments} </if>
+            <if test=" descriptionType != null and descriptionType != '' "> AND  DESCRIPTION_TYPE=#{descriptionType} </if>
+            <if test=" descriptionValue != null and descriptionValue != '' "> AND  DESCRIPTION_VALUE=#{descriptionValue} </if>
+            <if test=" feedId != null and feedId != '' "> AND  FEED_ID=#{feedId} </if>
+            <if test=" firstImg != null and firstImg != '' "> AND  FIRST_IMG=#{firstImg} </if>
+            <if test=" pubDateStr != null and pubDateStr != '' "> AND  PUB_DATE_STR=#{pubDateStr} </if>
+            <if test=" feedName != null and feedName != '' "> AND  FEED_NAME=#{feedName} </if>
+
+        	<if test=" orderBy !=null and orderBy!='' ">
+                order by ${orderBy}
+            </if>
+    </select>   
+    
+    <select id="countByMap"  resultType="java.lang.Integer" parameterType="java.util.Map">
+    	<![CDATA[
+	    	SELECT COUNT(ID)  FROM ITEM 
+	    	WHERE 1=1 
+    	]]>
+    	    <if test=" id != null and id != '' "> AND  ID=#{id} </if>
+            <if test=" title != null and title != '' "> AND  TITLE=#{title} </if>
+            <if test=" link != null and link != '' "> AND  LINK=#{link} </if>
+            <if test=" author != null and author != '' "> AND  AUTHOR=#{author} </if>
+            <if test=" category != null and category != '' "> AND  CATEGORY=#{category} </if>
+            <if test=" pubDate != null and pubDate != '' "> AND  PUB_DATE=#{pubDate} </if>
+            <if test=" comments != null and comments != '' "> AND  COMMENTS=#{comments} </if>
+            <if test=" descriptionType != null and descriptionType != '' "> AND  DESCRIPTION_TYPE=#{descriptionType} </if>
+            <if test=" descriptionValue != null and descriptionValue != '' "> AND  DESCRIPTION_VALUE=#{descriptionValue} </if>
+            <if test=" feedId != null and feedId != '' "> AND  FEED_ID=#{feedId} </if>
+            <if test=" firstImg != null and firstImg != '' "> AND  FIRST_IMG=#{firstImg} </if>
+            <if test=" pubDateStr != null and pubDateStr != '' "> AND  PUB_DATE_STR=#{pubDateStr} </if>
+            <if test=" feedName != null and feedName != '' "> AND  FEED_NAME=#{feedName} </if>
+
+    </select>  
+    
+    <select id="selectByLike" resultMap="Item" parameterType="java.util.Map">
+    	<![CDATA[
+	    	SELECT ID,TITLE,LINK,AUTHOR,CATEGORY,PUB_DATE,COMMENTS,DESCRIPTION_TYPE,DESCRIPTION_VALUE,FEED_ID,FIRST_IMG,PUB_DATE_STR,FEED_NAME FROM ITEM 
+	    	WHERE 1=1 
+    	]]>
+            <if test=" id != null and id != '' "> AND  ID=#{id} </if>
+            <if test=" title != null and title != '' " > AND TITLE LIKE CONCAT('%',#{title},'%') </if>
+            <if test=" link != null and link != '' " > AND LINK LIKE CONCAT('%',#{link},'%') </if>
+            <if test=" author != null and author != '' " > AND AUTHOR LIKE CONCAT('%',#{author},'%') </if>
+            <if test=" category != null and category != '' " > AND CATEGORY LIKE CONCAT('%',#{category},'%') </if>
+            <if test=" pubDate != null and pubDate != '' "> AND  PUB_DATE=#{pubDate} </if>
+            <if test=" comments != null and comments != '' " > AND COMMENTS LIKE CONCAT('%',#{comments},'%') </if>
+            <if test=" descriptionType != null and descriptionType != '' " > AND DESCRIPTION_TYPE LIKE CONCAT('%',#{descriptionType},'%') </if>
+            <if test=" descriptionValue != null and descriptionValue != '' "> AND  DESCRIPTION_VALUE=#{descriptionValue} </if>
+            <if test=" feedId != null and feedId != '' "> AND  FEED_ID=#{feedId} </if>
+            <if test=" firstImg != null and firstImg != '' " > AND FIRST_IMG LIKE CONCAT('%',#{firstImg},'%') </if>
+            <if test=" pubDateStr != null and pubDateStr != '' " > AND PUB_DATE_STR LIKE CONCAT('%',#{pubDateStr},'%') </if>
+            <if test=" feedName != null and feedName != '' " > AND FEED_NAME LIKE CONCAT('%',#{feedName},'%') </if>
+
+            <if test=" orderBy !=null and orderBy!='' ">
+                order by ${orderBy}
+            </if>
+     </select>
+    
+    <insert id="insert" parameterType="com.lmg.rss.feed.model.Item" useGeneratedKeys="true" keyProperty="id">
+        
+    	<![CDATA[
+    		INSERT INTO ITEM( TITLE,LINK,AUTHOR,CATEGORY,PUB_DATE,COMMENTS,DESCRIPTION_TYPE,DESCRIPTION_VALUE,FEED_ID,FIRST_IMG,PUB_DATE_STR,FEED_NAME ) VALUES (#{title},#{link},#{author},#{category},#{pubDate},#{comments},#{descriptionType},#{descriptionValue},#{feedId},#{firstImg},#{pubDateStr},#{feedName} )
+    	]]>
+    </insert>
+
+	
+	<update id="update" parameterType="com.lmg.rss.feed.model.Item">
+		<![CDATA[
+			UPDATE ITEM SET ID=#{id},TITLE=#{title},LINK=#{link},AUTHOR=#{author},CATEGORY=#{category},PUB_DATE=#{pubDate},COMMENTS=#{comments},DESCRIPTION_TYPE=#{descriptionType},DESCRIPTION_VALUE=#{descriptionValue},FEED_ID=#{feedId},FIRST_IMG=#{firstImg},PUB_DATE_STR=#{pubDateStr},FEED_NAME=#{feedName} WHERE ID=#{id}
+		]]>
+	</update>   
+	
+	<delete id="delete">
+		DELETE FROM ITEM WHERE ID = #{id}
+	</delete>
+    
+    <select id="countByUser" resultMap="Item" parameterType="java.util.Map">
+        <![CDATA[
+            SELECT count(id) FROM ITEM 
+            inner join user_feed on item.feed_id=user_feed.feed_id
+            WHERE user_feed.user_id=#{userId}
+        ]]>
+            <if test=" id != null and id != '' "> AND  ID=#{id} </if>
+            <if test=" title != null and title != '' "> AND  TITLE=#{title} </if>
+            <if test=" link != null and link != '' "> AND  LINK=#{link} </if>
+            <if test=" author != null and author != '' "> AND  AUTHOR=#{author} </if>
+            <if test=" category != null and category != '' "> AND  CATEGORY=#{category} </if>
+            <if test=" pubDate != null and pubDate != '' "> AND  PUB_DATE=#{pubDate} </if>
+            <if test=" comments != null and comments != '' "> AND  COMMENTS=#{comments} </if>
+            <if test=" descriptionType != null and descriptionType != '' "> AND  DESCRIPTION_TYPE=#{descriptionType} </if>
+            <if test=" descriptionValue != null and descriptionValue != '' "> AND  DESCRIPTION_VALUE=#{descriptionValue} </if>
+            <if test=" feedId != null and feedId != '' "> AND  item.FEED_ID=#{feedId} </if>
+            <if test=" firstImg != null and firstImg != '' "> AND  FIRST_IMG=#{firstImg} </if>
+            <if test=" pubDateStr != null and pubDateStr != '' "> AND  PUB_DATE_STR=#{pubDateStr} </if>
+            <if test=" feedName != null and feedName != '' "> AND  FEED_NAME=#{feedName} </if>
+
+    </select>  
+    
+    
+    <select id="selectByUser" resultMap="Item" parameterType="java.util.Map">
+        <![CDATA[
+            SELECT ID,TITLE,LINK,AUTHOR,CATEGORY,PUB_DATE,COMMENTS,DESCRIPTION_TYPE,DESCRIPTION_VALUE,item.FEED_ID,FIRST_IMG,PUB_DATE_STR,FEED_NAME FROM ITEM 
+            inner join user_feed on item.feed_id=user_feed.feed_id
+            WHERE user_feed.user_id=#{userId}
+        ]]>
+            <if test=" id != null and id != '' "> AND  ID=#{id} </if>
+            <if test=" title != null and title != '' "> AND  TITLE=#{title} </if>
+            <if test=" link != null and link != '' "> AND  LINK=#{link} </if>
+            <if test=" author != null and author != '' "> AND  AUTHOR=#{author} </if>
+            <if test=" category != null and category != '' "> AND  CATEGORY=#{category} </if>
+            <if test=" pubDate != null and pubDate != '' "> AND  PUB_DATE=#{pubDate} </if>
+            <if test=" comments != null and comments != '' "> AND  COMMENTS=#{comments} </if>
+            <if test=" descriptionType != null and descriptionType != '' "> AND  DESCRIPTION_TYPE=#{descriptionType} </if>
+            <if test=" descriptionValue != null and descriptionValue != '' "> AND  DESCRIPTION_VALUE=#{descriptionValue} </if>
+            <if test=" feedId != null and feedId != '' "> AND  item.FEED_ID=#{feedId} </if>
+            <if test=" firstImg != null and firstImg != '' "> AND  FIRST_IMG=#{firstImg} </if>
+            <if test=" pubDateStr != null and pubDateStr != '' "> AND  PUB_DATE_STR=#{pubDateStr} </if>
+            <if test=" feedName != null and feedName != '' "> AND  FEED_NAME=#{feedName} </if>
+
+            <if test=" orderBy !=null and orderBy!='' ">
+                order by ${orderBy}
+            </if>
+    </select>   
+    
+    <select id="countByUserLike" resultMap="Item" parameterType="java.util.Map">
+        <![CDATA[
+            SELECT count(id) FROM ITEM 
+            inner join user_item on item.feed_id=user_item.feed_id
+            WHERE user_item.user_id=#{userId}
+        ]]>
+            <if test=" id != null and id != '' "> AND  ID=#{id} </if>
+            <if test=" title != null and title != '' "> AND  TITLE=#{title} </if>
+            <if test=" link != null and link != '' "> AND  LINK=#{link} </if>
+            <if test=" author != null and author != '' "> AND  AUTHOR=#{author} </if>
+            <if test=" category != null and category != '' "> AND  CATEGORY=#{category} </if>
+            <if test=" pubDate != null and pubDate != '' "> AND  PUB_DATE=#{pubDate} </if>
+            <if test=" comments != null and comments != '' "> AND  COMMENTS=#{comments} </if>
+            <if test=" descriptionType != null and descriptionType != '' "> AND  DESCRIPTION_TYPE=#{descriptionType} </if>
+            <if test=" descriptionValue != null and descriptionValue != '' "> AND  DESCRIPTION_VALUE=#{descriptionValue} </if>
+            <if test=" feedId != null and feedId != '' "> AND  item.FEED_ID=#{feedId} </if>
+            <if test=" firstImg != null and firstImg != '' "> AND  FIRST_IMG=#{firstImg} </if>
+            <if test=" pubDateStr != null and pubDateStr != '' "> AND  PUB_DATE_STR=#{pubDateStr} </if>
+            <if test=" feedName != null and feedName != '' "> AND  FEED_NAME=#{feedName} </if>
+
+    </select>  
+    
+    
+    <select id="selectByUserLike" resultMap="Item" parameterType="java.util.Map">
+        <![CDATA[
+            SELECT ID,TITLE,LINK,AUTHOR,CATEGORY,PUB_DATE,COMMENTS,DESCRIPTION_TYPE,DESCRIPTION_VALUE,item.FEED_ID,FIRST_IMG,PUB_DATE_STR,FEED_NAME FROM ITEM 
+            inner join user_item on item.feed_id=user_item.feed_id
+            WHERE user_item.user_id=#{userId}
+        ]]>
+            <if test=" id != null and id != '' "> AND  ID=#{id} </if>
+            <if test=" title != null and title != '' "> AND  TITLE=#{title} </if>
+            <if test=" link != null and link != '' "> AND  LINK=#{link} </if>
+            <if test=" author != null and author != '' "> AND  AUTHOR=#{author} </if>
+            <if test=" category != null and category != '' "> AND  CATEGORY=#{category} </if>
+            <if test=" pubDate != null and pubDate != '' "> AND  PUB_DATE=#{pubDate} </if>
+            <if test=" comments != null and comments != '' "> AND  COMMENTS=#{comments} </if>
+            <if test=" descriptionType != null and descriptionType != '' "> AND  DESCRIPTION_TYPE=#{descriptionType} </if>
+            <if test=" descriptionValue != null and descriptionValue != '' "> AND  DESCRIPTION_VALUE=#{descriptionValue} </if>
+            <if test=" feedId != null and feedId != '' "> AND  item.FEED_ID=#{feedId} </if>
+            <if test=" firstImg != null and firstImg != '' "> AND  FIRST_IMG=#{firstImg} </if>
+            <if test=" pubDateStr != null and pubDateStr != '' "> AND  PUB_DATE_STR=#{pubDateStr} </if>
+            <if test=" feedName != null and feedName != '' "> AND  FEED_NAME=#{feedName} </if>
+
+            <if test=" orderBy !=null and orderBy!='' ">
+                order by ${orderBy}
+            </if>
+    </select>  
+    
+    <insert id="batchInsert" parameterType="java.util.List">
+       INSERT INTO ITEM( TITLE,LINK,AUTHOR,CATEGORY,PUB_DATE,COMMENTS,DESCRIPTION_TYPE,DESCRIPTION_VALUE,FEED_ID,FIRST_IMG,PUB_DATE_STR,FEED_NAME ) VALUES 
+       <foreach collection="list" item="item" index="index"
+           separator=",">
+           (#{item.title},#{item.link},#{item.author},#{item.category},#{item.pubDate},#{item.comments},#{item.descriptionType},#{item.descriptionValue},#{item.feedId},#{item.firstImg},#{item.pubDateStr},#{item.feedName} )
+       </foreach>
+</insert>
+</mapper>

@@ -6,6 +6,7 @@ package com.lmg.rss.util;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -13,13 +14,11 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 
-import com.lmg.rss.feed.dao.FeedRepository;
-import com.lmg.rss.feed.dao.ItemRepository;
 import com.lmg.rss.feed.model.Feed;
 import com.lmg.rss.feed.model.Item;
+import com.lmg.rss.feed.service.FeedManager;
+import com.lmg.rss.feed.service.ItemManager;
 
 /***********************************
  * @ClassName: FetchFeed.java
@@ -30,11 +29,11 @@ import com.lmg.rss.feed.model.Item;
 
 @ComponentScan
 public class FetchFeed extends Thread {
-    private static Logger  logger = LoggerFactory.getLogger(FetchFeed.class);
+    private static Logger logger = LoggerFactory.getLogger(FetchFeed.class);
     
-    private FeedRepository feedRepository;
+    private FeedManager   feedManager;
     
-    private ItemRepository itemRepository;
+    private ItemManager   itemManager;
     
     
     /**
@@ -48,9 +47,9 @@ public class FetchFeed extends Thread {
      * @param feedRepository2
      * @param itemRepository2
      */
-    public FetchFeed(FeedRepository feedRepository, ItemRepository itemRepository) {
-        this.feedRepository = feedRepository;
-        this.itemRepository = itemRepository;
+    public FetchFeed(FeedManager feedManager, ItemManager itemManager) {
+        this.feedManager = feedManager;
+        this.itemManager = itemManager;
         this.setName("FetchFeed线程");
     }
     
@@ -64,7 +63,7 @@ public class FetchFeed extends Thread {
     @Override
     public void run() {
         while (true){
-            List<Feed> feedList = feedRepository.findByReferCountGreaterThan(0);
+            List<Feed> feedList = feedManager.selectAll();
             for (Feed feed : feedList){
                 try{
                     Map<String, Object> feedAndItems = FeedUtil.parseReturnFeedAndItems(feed.getUrl());
@@ -76,10 +75,12 @@ public class FetchFeed extends Thread {
                     
                     if (feed.getTitle() != null && !feed.getTitle().trim().equals("")){
                         Date lastUpdDate = new Date(0L);
-                        Page<Item> items = itemRepository.findByFeedIdOrderByPubDateDesc(feed.getId(), new PageRequest(
-                                0, 1));
-                        if (items != null && items.hasContent()){
-                            Item item = items.getContent().get(0);
+                        Map<String, Object> queryMap = new HashMap<String, Object>();
+                        queryMap.put("feedId", feed.getId());
+                        queryMap.put("orderBy", "PUB_DATE desc");
+                        List<Item> items = itemManager.selectByMap(queryMap);
+                        if (items.size() > 0){
+                            Item item = items.get(0);
                             lastUpdDate = item.getPubDate();
                         }
                         
@@ -89,20 +90,22 @@ public class FetchFeed extends Thread {
                                 it.remove();
                             } else{
                                 // 重复性检测
-                                if (itemRepository.countByLink(item.getLink()) == 0){
-                                    item.setFeed(feed);
+                                Map<String, Object> map = new HashMap<String, Object>();
+                                map.put("link", item.getLink());
+                                if (itemManager.countByMap(map) == 0){
+                                    item.setFeedId(feed.getId());
                                 } else{
                                     it.remove();
                                 }
                             }
                         }
                         if (itemList.size() > 0){
-                            itemRepository.save(itemList);
+                            itemManager.batchInsert(itemList);
                             System.out.println(feed.getTitle() + "更新" + itemList.size() + "条" + new Date());
                         }
                     }
                     feed.setLastUpdDate(new Timestamp(System.currentTimeMillis()));
-                    feedRepository.save(feed);
+                    feedManager.update(feed);
                 } catch (Exception e){
                     logger.error("Feed解析错误,URL:" + feed, e);
                 }
